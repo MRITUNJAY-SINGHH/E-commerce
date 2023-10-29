@@ -131,6 +131,40 @@ const deleteUser = asyncHandler(async function (req, res) {
       throw new Error(error)
    }
 })
+
+//Logout Features
+
+//Logout Features
+const logout = asyncHandler(async (req, res) => {
+   const cookie = req.cookies
+   if (!cookie?.refreshToken) {
+      throw new Error('No refresh token in cookies')
+   }
+
+   const refreshToken = cookie.refreshToken
+   console.log(refreshToken)
+   const userData = await user.findOne({ refreshToken })
+
+   if (!userData) {
+      res.clearCookie('refreshToken', {
+         httpOnly: true,
+         secure: true,
+      })
+      return res.sendStatus(204) // Forbidden
+   }
+
+   await user.findOneAndUpdate({ refreshToken }, { refreshToken: '' }) // Use user model here
+
+   res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: true,
+   })
+
+   res.sendStatus(204) // Forbidden
+})
+
+//Blocked user
+
 const blockUser = asyncHandler(async (req, res) => {
    const { id } = req.params
    validateMongoDbId(id)
@@ -181,4 +215,5 @@ module.exports = {
    blockUser,
    unblockUser,
    handleRefreshToken,
+   logout,
 }
