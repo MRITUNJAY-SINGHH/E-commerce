@@ -76,13 +76,13 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
       return false // Handle the error gracefully
    }
 }
-userSchema.methods.createpasswordResetToken = async function () {
+userSchema.methods.createPasswordResetToken = async function () {
    const resetToken = crypto.randomBytes(32).toString('hex')
    this.passwordResetToken = crypto
-      .createHash('sha258')
+      .createHash('sha256')
       .update(resetToken)
       .digest('hex')
-   this.passwordResetExpire = Date.now() + 30 * 60 * 1000 // 10Minutes
+   this.passwordResetExpire = Date.now() + 10 * 60 * 1000 // 10 Minutes
    return resetToken
 }
 
