@@ -7,10 +7,11 @@ const authRouter = require('./routes/authRoute')
 const { notfound, errorHandlingApi } = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
 const productRouter = require('./routes/productRoute')
+const morgan = require('morgan')
 const app = express()
 
 dbConnect() // Connect to the database
-
+app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
