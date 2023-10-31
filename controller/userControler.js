@@ -57,7 +57,7 @@ const handleRefreshToken = asyncHandler(async function (req, res) {
    const cookie = req.cookies
    if (!cookie?.refreshToken) throw new Error('no refresh token in cookies')
    const refreshToken = cookie.refreshToken
-   console.log(refreshToken)
+
    const userData = await user.findOne({ refreshToken })
    if (!userData)
       throw new Error('no Refresh token is present in db or not matched')
@@ -144,7 +144,7 @@ const logout = asyncHandler(async (req, res) => {
    }
 
    const refreshToken = cookie.refreshToken
-   console.log(refreshToken)
+
    const userData = await user.findOne({ refreshToken })
 
    if (!userData) {

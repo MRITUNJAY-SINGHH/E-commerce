@@ -7,6 +7,7 @@ const authRouter = require('./routes/authRoute')
 const { notfound, errorHandlingApi } = require('./middlewares/errorHandler')
 const cookieParser = require('cookie-parser')
 const productRouter = require('./routes/productRoute')
+const blogRouter = require('./routes/blogRouter')
 const morgan = require('morgan')
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(cookieParser())
 
 app.use('/api/user', authRouter)
 app.use('/api/product', productRouter)
+app.use('/api/blog', blogRouter)
 
 app.use(notfound)
 app.use(errorHandlingApi)
