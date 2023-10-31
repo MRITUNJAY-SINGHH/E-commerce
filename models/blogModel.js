@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 // Declare the Schema of the Mongo model
 var blogSchema = new mongoose.Schema(
@@ -22,13 +22,13 @@ var blogSchema = new mongoose.Schema(
       Likes: [
          {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
+            ref: 'User',
          },
       ],
       Dislikes: [
          {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user',
+            ref: 'User',
          },
       ],
       isLiked: {
@@ -52,7 +52,7 @@ var blogSchema = new mongoose.Schema(
    {
       timestamps: true,
    }
-)
+);
 
 // Export the model
-module.exports = mongoose.model('Blog', blogSchema)
+module.exports = mongoose.model('Blog', blogSchema);
