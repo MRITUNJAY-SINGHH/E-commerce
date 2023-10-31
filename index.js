@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const productRouter = require('./routes/productRoute');
 const blogRouter = require('./routes/blogRouter');
 const ProductCategoryRouter = require('./routes/ProductCategoryRouter');
+const blogCategoryRouter = require('./routes/blogCategoryRouter');
 const morgan = require('morgan');
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/api/user', authRouter);
 app.use('/api/product', productRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/category', ProductCategoryRouter);
+app.use('/api/blogcategory', blogCategoryRouter);
 
 app.use(notfound);
 app.use(errorHandlingApi);
