@@ -44,12 +44,24 @@ let productSchema = new mongoose.Schema(
          type: String,
          required: true,
       },
-      ratings: {
-         star: Number,
-         postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      ratings: [
+         {
+            star: Number,
+            comment: String,
+            postedBy: {
+               type: mongoose.Schema.Types.ObjectId,
+               ref: 'User',
+            },
+         },
+      ],
+      totalrating: {
+         type: String,
+         default: 0,
       },
    },
    { timestamps: true }
 );
 
-module.exports = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;
