@@ -39,17 +39,19 @@ let blogSchema = new mongoose.Schema(
          type: Boolean,
          default: false,
       },
-      image: {
-         type: String,
-         default:
-            'https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2022/03/what-is-a-blog-1.webp',
-      },
       author: {
          type: String,
          default: 'Admin',
       },
+      images: [],
    },
    {
+      toJSON: {
+         virtuals: true,
+      },
+      toObject: {
+         virtuals: true,
+      },
       timestamps: true,
    }
 );
