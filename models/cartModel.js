@@ -16,10 +16,11 @@ let cartSchema = new mongoose.Schema(
       totalAfterDiscount: Number,
       orderby: {
          type: mongoose.Schema.Types.ObjectId,
-         ref: 'User',
+         ref: 'user',
       },
    },
    { timestamps: true }
 );
+const Cart = mongoose.model('Cart', cartSchema);
 
-module.exports = mongoose.model('Cart', cartSchema);
+module.exports = Cart;

@@ -17,6 +17,7 @@ const {
    loginAdmin,
    getWishlist,
    saveAddress,
+   userCart,
 } = require('../controller/userControler');
 const { authMiddleware, isAdmin } = require('../middlewares/authMiddleware');
 
@@ -28,6 +29,7 @@ authRouter.get('/:id', authMiddleware, isAdmin, getOneUsers);
 authRouter.post('/register', createUser);
 authRouter.post('/login', loginUser);
 authRouter.post('/login/admin', loginAdmin);
+authRouter.post('/cart', authMiddleware, userCart);
 authRouter.post('/forget', forgetPasswordToken);
 authRouter.put('/forget/:token', resetPassword);
 authRouter.put('/password', authMiddleware, updatePassword);

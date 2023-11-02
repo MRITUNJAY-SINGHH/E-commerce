@@ -12,11 +12,7 @@ let orderSchema = new mongoose.Schema(
             color: String,
          },
       ],
-      paymentIntent: {
-         type: String,
-         enum: ['Cash On Delivery', 'Stripe'],
-         default: 'Cash On Delivery',
-      },
+      paymentIntent: {},
       orderStatus: {
          type: String,
          default: 'Not Processed',
@@ -31,7 +27,7 @@ let orderSchema = new mongoose.Schema(
       },
       orderby: {
          type: mongoose.Schema.Types.ObjectId,
-         ref: 'User',
+         ref: 'user',
       },
    },
    { timestamps: true }
