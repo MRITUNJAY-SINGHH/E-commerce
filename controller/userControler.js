@@ -172,8 +172,6 @@ const deleteUser = asyncHandler(async function (req, res) {
 });
 
 //Logout Features
-
-//Logout Features
 const logout = asyncHandler(async (req, res) => {
    const cookie = req.cookies;
    if (!cookie?.refreshToken) {
@@ -246,7 +244,7 @@ const unblockUser = asyncHandler(async (req, res) => {
    }
 });
 
-//reset password
+//Update password or reset
 const updatePassword = asyncHandler(async (req, res) => {
    const { _id } = req.user;
    const { password } = req.body;
@@ -293,6 +291,7 @@ const forgetPasswordToken = asyncHandler(async (req, res) => {
       });
    }
 });
+//Reset Password
 const resetPassword = asyncHandler(async (req, res) => {
    const { password } = req.body;
    const { token } = req.params;
@@ -307,6 +306,41 @@ const resetPassword = asyncHandler(async (req, res) => {
    User.passwordResetExpire = undefined;
    await User.save();
    res.json(User);
+});
+//get Wishlist
+
+const getWishlist = asyncHandler(async (req, res) => {
+   const { _id } = req.user;
+   validateMongoDbId(_id);
+   try {
+      const User = await user.findById(_id).populate('wishlist');
+      res.json(User);
+   } catch (error) {
+      throw new Error(error);
+   }
+});
+
+//save all user address
+
+const saveAddress = asyncHandler(async (req, res, next) => {
+   const { _id } = req.user;
+   validateMongoDbId(_id);
+   try {
+      const updatedAddress = await user.findByIdAndUpdate(
+         _id,
+         {
+            address: req?.body.address,
+         },
+         {
+            new: true,
+         }
+      );
+      res.json({
+         updatedAddress: updatedAddress,
+      });
+   } catch (error) {
+      throw new Error(error);
+   }
 });
 
 module.exports = {
@@ -324,4 +358,6 @@ module.exports = {
    forgetPasswordToken,
    resetPassword,
    loginAdmin,
+   getWishlist,
+   saveAddress,
 };
