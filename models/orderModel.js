@@ -25,12 +25,9 @@ let orderSchema = new mongoose.Schema(
             'Completed',
          ],
       },
-      orderby: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: 'user',
-      },
+      orderby: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
    },
    { timestamps: true }
 );
-
-module.exports = mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
+module.exports = Order;
