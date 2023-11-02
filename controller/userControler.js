@@ -1,6 +1,7 @@
 const user = require('../models/userModel');
 const product = require('../models/productModel');
 const Cart = require('../models/cartModel');
+const Coupon = require('../models/couponModel');
 const { generateToken } = require('../config/jwtToken');
 const asyncHandler = require('express-async-handler');
 const validateMongoDbId = require('../utils/validateMongodb');
@@ -392,6 +393,56 @@ const userCart = asyncHandler(async (req, res) => {
       throw new Error(error);
    }
 });
+//get User Cart
+const getUserCart = asyncHandler(async (req, res) => {
+   const { _id } = req.user;
+   validateMongoDbId(_id);
+   try {
+      const cart = await Cart.findOne({ orderby: _id }).populate(
+         'products.product'
+      );
+      res.json(cart);
+   } catch (error) {
+      throw new Error(error);
+   }
+});
+
+// empty cart
+
+const emptyCart = asyncHandler(async (req, res) => {
+   const { _id } = req.user;
+   validateMongoDbId(_id);
+   try {
+      const User = await user.findOne({ _id });
+      const cart = await Cart.findOneAndRemove({ orderby: User._id });
+      res.json(cart);
+   } catch (error) {
+      throw new Error(error);
+   }
+});
+
+const applyCoupon = asyncHandler(async (req, res) => {
+   const { _id } = req.user;
+   const { coupon } = req.body;
+   const validCoupon = await Coupon.findOne({ name: coupon });
+   if (validCoupon == null) {
+      throw new Error('Invalid Coupon');
+   }
+   const User = await user.findOne({ _id });
+   let { products, cartTotal } = await Cart.findOne({
+      orderby: User._id,
+   }).populate('products.product');
+   let totalAfterDiscount = (
+      cartTotal -
+      (cartTotal * validCoupon.discount) / 100
+   ).toFixed(2);
+   await Cart.findOneAndUpdate(
+      { orderby: User._id },
+      { totalAfterDiscount },
+      { new: true }
+   );
+   res.json(totalAfterDiscount);
+});
 
 module.exports = {
    createUser,
@@ -411,4 +462,7 @@ module.exports = {
    getWishlist,
    saveAddress,
    userCart,
+   getUserCart,
+   emptyCart,
+   applyCoupon,
 };
