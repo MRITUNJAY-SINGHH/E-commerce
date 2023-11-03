@@ -16,12 +16,25 @@ let userSchema = new mongoose.Schema(
       mobile: {
          type: Number,
          required: true,
-         unique: true,
+         validate: {
+            validator: function (v) {
+               // Ensure the mobile number has at least 10 digits
+               return /^\d{10,}$/.test(v);
+            },
+            message: 'Mobile number must have at least 10 digits',
+         },
       },
       email: {
          type: String,
          required: true,
-         unique: true,
+         validate: {
+            validator: function (v) {
+               // Ensure the email is in a valid format (ends with @gmail.com)
+               return /@gmail\.com$/.test(v);
+            },
+            message:
+               'Email must be a valid Gmail address (e.g., user@gmail.com)',
+         },
       },
       password: {
          type: String,
