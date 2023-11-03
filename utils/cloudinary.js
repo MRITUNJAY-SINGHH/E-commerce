@@ -6,18 +6,37 @@ cloudinary.config({
 });
 
 const cloudinaryUploadImg = async (fileToUpload) => {
-   return new Promise((resolve, reject) => {
+   return new Promise((resolve) => {
       cloudinary.uploader.upload(fileToUpload, (result) => {
-         if (result.error) {
-            reject(result.error.message);
-         } else {
-            resolve({
+         resolve(
+            {
                url: result.secure_url,
-               resource_type: result.resource_type,
-            });
-         }
+               asset_id: result.asset_id,
+               public_id: result.public_id,
+            },
+            {
+               resource_type: 'auto',
+            }
+         );
+      });
+   });
+};
+//file to delete
+const cloudinaryDeleteImg = async (fileToDelete) => {
+   return new Promise((resolve) => {
+      cloudinary.uploader.destroy(fileToDelete, (result) => {
+         resolve(
+            {
+               url: result.secure_url,
+               asset_id: result.asset_id,
+               public_id: result.public_id,
+            },
+            {
+               resource_type: 'auto',
+            }
+         );
       });
    });
 };
 
-module.exports = cloudinaryUploadImg;
+module.exports = { cloudinaryUploadImg, cloudinaryDeleteImg };
