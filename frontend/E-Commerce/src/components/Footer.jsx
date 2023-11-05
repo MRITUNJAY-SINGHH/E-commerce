@@ -47,13 +47,13 @@ const Footer = () => {
                            PinCodes: 201001
                         </address>
                         <a
-                           href='tel:+91 7065429235'
+                           to='tel:+91 7065429235'
                            className='mt-2 d-block mb-2 text-white'
                         >
                            +91 7065429235
                         </a>
                         <a
-                           href='mailto: mritunjays447@gmail.com'
+                           to='mailto: mritunjays447@gmail.com'
                            className='mt-2 d-block mb-3 text-white'
                         >
                            mritunjays447@gmail.com
@@ -61,21 +61,21 @@ const Footer = () => {
                         <div className='social-icons d-flex align-items-center gap-20'>
                            <span className='text-white'>Connect With Us</span>
                            <a
-                              href='https://www.instagram.com/mritunjay_rajput_'
+                              to='https://www.instagram.com/mritunjay_rajput_'
                               target='_blank'
                               rel='noopener noreferrer'
                            >
                               <FaInstagram className='text-white' size={25} />
                            </a>
                            <a
-                              href='https://github.com/MRITUNJAY-SINGHH'
+                              to='https://github.com/MRITUNJAY-SINGHH'
                               target='_blank'
                               rel='noopener noreferrer'
                            >
                               <FaGithub className='text-white' size={25} />
                            </a>
                            <a
-                              href='https://www.linkedin.com/in/mritunjay-singh-022333282/'
+                              to='https://www.linkedin.com/in/mritunjay-singh-022333282/'
                               target='_blank'
                               rel='noopener noreferrer'
                            >

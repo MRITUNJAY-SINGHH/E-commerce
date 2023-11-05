@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Marquee from 'react-fast-marquee';
+import BlogCard from '../components/blogCard';
+import ProductCard from '../components/ProductCard';
 
 const Home = () => {
    return (
       <>
          <section className='home-wrapper-1'>
-            <div className='container-xxl custom-width'>
+            <div className='container-fluid'>
                <div className='row'>
                   <div className='col-12 '>
                      <div
@@ -39,6 +42,13 @@ const Home = () => {
                            <div className='carousel-item'>
                               <img
                                  src='https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/7ef9754529c2da8b.jpeg?q=100'
+                                 className='d-block w-100 custom-carousel-image'
+                                 alt='Image 3'
+                              />
+                           </div>
+                           <div className='carousel-item'>
+                              <img
+                                 src='https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/aa64c35bfaa1931d.jpeg?q=100'
                                  className='d-block w-100 custom-carousel-image'
                                  alt='Image 3'
                               />
@@ -77,7 +87,7 @@ const Home = () => {
                   </div>
                </div>
             </div>
-            <div className='home-wrapper'>
+            <div className='home-wrapper container-fluid'>
                <div className='flex'>
                   <div className='col-4'>
                      <img
@@ -100,82 +110,84 @@ const Home = () => {
                </div>
             </div>
             {/* // 3rd layout */}
-            <div className='container custom-width'>
-               <div className='row'>
-                  <div className='col-5 column-5'>
-                     <div className='d-flex flex-wrap justify-content-between align-items-center flex-column'>
-                        <div className='main-banner-content p-3 position-relative'>
-                           <img
-                              src='https://www.apple.com/v/airpods/u/images/overview/airpods_max__f265q4g4ddym_large_2x.png'
-                              className='rounded-3 img-fluid'
-                              alt='Supercharged for Pros'
-                           />
-                           <div className='main-banner position-absolute'>
-                              <h4>SUPERCHARGED FOR PROS</h4>
-                              <h5>AirPods Max.</h5>
-                              <p>
-                                 From ₹59900.00* or ₹2,495.88/month
-                                 <br />
-                                 for 24 Months.
-                              </p>
-                              <Link className='button'>BUY NOW</Link>
+            <div className='third-layout'>
+               <div className='container-fluid'>
+                  <div className='row'>
+                     <div className='col-5'>
+                        <div className='d-flex flex-wrap justify-content-between align-items-center flex-column'>
+                           <div className='main-banner-content p-3 position-relative'>
+                              <img
+                                 src='https://www.apple.com/v/airpods/u/images/overview/airpods_max__f265q4g4ddym_large_2x.png'
+                                 className='rounded-3 img-fluid'
+                                 alt='Supercharged for Pros'
+                              />
+                              <div className='main-banner position-absolute'>
+                                 <h4>SUPERCHARGED FOR PROS</h4>
+                                 <h5>AirPods Max.</h5>
+                                 <p>
+                                    From ₹59900.00* or ₹2,495.88/month
+                                    <br />
+                                    for 24 Months.
+                                 </p>
+                                 <Link className='button'>BUY NOW</Link>
+                              </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-                  <div className='col-6'>
-                     <div className='d-flex flex-wrap justify-content-between align-items-center'>
-                        <div className='small-banner p-3 position-relative'>
-                           <img
-                              src='/images/catbanner-01.jpg'
-                              className='rounded-3 img-fluid'
-                              alt='Best Sale'
-                           />
-                           <div className='small-banner-content position-absolute'>
-                              <h4>Best Sale</h4>
-                              <h5>Best Laptops</h5>
+                     <div className='col-6'>
+                        <div className='d-flex flex-wrap justify-content-between align-items-center'>
+                           <div className='small-banner p-3 position-relative'>
+                              <img
+                                 src='/images/catbanner-01.jpg'
+                                 className='rounded-3 img-fluid'
+                                 alt='Best Sale'
+                              />
+                              <div className='small-banner-content position-absolute'>
+                                 <h4>Best Sale</h4>
+                                 <h5>Best Laptops</h5>
 
-                              <p>1. Powerful processors</p>
-                              <p>2. High-resolution display</p>
+                                 <p>1. Powerful processors</p>
+                                 <p>2. High-resolution display</p>
+                              </div>
                            </div>
-                        </div>
-                        <div className='small-banner p-3 position-relative'>
-                           <img
-                              src='/images/catbanner-03.jpg'
-                              className='rounded-3 img-fluid'
-                              alt='New Arrival'
-                           />
-                           <div className='small-banner-content position-absolute'>
-                              <h4>New Lunch</h4>
-                              <h5>IPad Air</h5>
-                              <p>1. Stunning design</p>
-                              <p>2. Powerful A-series chip</p>
+                           <div className='small-banner p-3 position-relative'>
+                              <img
+                                 src='/images/catbanner-03.jpg'
+                                 className='rounded-3 img-fluid'
+                                 alt='New Arrival'
+                              />
+                              <div className='small-banner-content position-absolute'>
+                                 <h4>New Lunch</h4>
+                                 <h5>IPad Air</h5>
+                                 <p>1. Stunning design</p>
+                                 <p>2. Powerful A-series chip</p>
+                              </div>
                            </div>
-                        </div>
-                        <div className='small-banner p-3 position-relative'>
-                           <img
-                              src='/images/catbanner-02.jpg'
-                              className='rounded-3 img-fluid'
-                              alt='15% Off'
-                           />
-                           <div className='small-banner-content position-absolute'>
-                              <h4>15% Off</h4>
-                              <h5>Smartwatch 7</h5>
-                              <p>1. Health and fitness tracking</p>
-                              <p>2. Interactive touch screen</p>
+                           <div className='small-banner p-3 position-relative'>
+                              <img
+                                 src='/images/catbanner-02.jpg'
+                                 className='rounded-3 img-fluid'
+                                 alt='15% Off'
+                              />
+                              <div className='small-banner-content position-absolute'>
+                                 <h4>15% Off</h4>
+                                 <h5>Smartwatch 7</h5>
+                                 <p>1. Health and fitness tracking</p>
+                                 <p>2. Interactive touch screen</p>
+                              </div>
                            </div>
-                        </div>
-                        <div className='small-banner p-3 position-relative'>
-                           <img
-                              src='/images/catbanner-04.jpg'
-                              className='rounded-3 img-fluid'
-                              alt='15% Off'
-                           />
-                           <div className='small-banner-content position-absolute'>
-                              <h4>15% Off</h4>
-                              <h5>AirPods Max</h5>
-                              <p>1. High-fidelity sound</p>
-                              <p>2. Active noise cancellation</p>
+                           <div className='small-banner p-3 position-relative'>
+                              <img
+                                 src='/images/catbanner-04.jpg'
+                                 className='rounded-3 img-fluid'
+                                 alt='15% Off'
+                              />
+                              <div className='small-banner-content position-absolute'>
+                                 <h4>15% Off</h4>
+                                 <h5>AirPods Max</h5>
+                                 <p>1. High-fidelity sound</p>
+                                 <p>2. Active noise cancellation</p>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -183,8 +195,9 @@ const Home = () => {
                </div>
             </div>
          </section>
+         {/* {section one end} */}
          <section className='home-wrapper-2'>
-            <div className='container-xxl'>
+            <div className='container-fluid'>
                <div className='row'>
                   <div className='col-12'>
                      <div className='services d-flex align-items-center justify-content-between'>
@@ -242,6 +255,172 @@ const Home = () => {
                </div>
             </div>
          </section>
+         {/* {section Two end} */}
+         <section className='home-wrapper-3 py-5 container-fluid'>
+            <div className='main-categories'>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Cameras</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/312/312/knyxqq80/dslr-camera/r/y/x/digital-camera-eos-m50-mark-ii-eos-m50-mark-ii-canon-original-imag2gzkexzqhyhu.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Smart Tv</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/312/312/xif0q/television/j/2/j/-original-imagtq4hqqt37tgx.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Laptops</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/xif0q/computer/2/x/m/-original-imagp7wan6syzfy4.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Smartwatches</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/xif0q/smartwatch/h/m/e/-original-imagkfm8fgvwjy8y.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Mobiles & Tablets</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/xif0q/mobile/p/8/t/-original-imagcv8crx9bfhuc.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Portable Speakers</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/kpzt7680/speaker/mobile-tablet-speaker/c/7/o/sounddrum-1-por-1327-portronics-original-imag43tcuz8swymc.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Headphones</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/jhql8cw0/headphone/9/p/e/acer-predator-galea-500-original-imaf5zx5e8ypbjpg.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+               <div className='categories'>
+                  <div className='categories-paragraph'>
+                     <h6>Gamings</h6>
+                     <p>10 Items</p>
+                  </div>
+                  <div className='categories-img'>
+                     <img
+                        src='https://rukminim2.flixcart.com/image/612/612/xif0q/gamingconsole/z/b/w/-original-imagtk7vfbzqbjg6.jpeg?q=70'
+                        alt='camera-img'
+                     />
+                  </div>
+               </div>
+            </div>
+         </section>
+         {/* {section three end} */}
+         <section className='marque-wrapper mb-5'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <div className='marquee-inner-wrapper bg-white p-3'>
+                        <Marquee className='d-flex'>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-01.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-02.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-03.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-04.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-07.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-05.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-06.png' alt='Brand' />
+                           </div>
+                           <div className='mx-4 w-10'>
+                              <img src='images/brand-03.png' alt='Brand' />
+                           </div>
+                        </Marquee>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         {/* {Marquee section  end} */}
+         <section className='blog-wrapper product-wrapper'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <h3 className='section-heading'>Features Collections</h3>
+                  </div>
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+               </div>
+            </div>
+         </section>
+         <section className='blog-wrapper'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <h3 className='section-heading'>Our Latest Blogs</h3>
+                  </div>
+                  <BlogCard />
+                  <BlogCard />
+                  <BlogCard />
+                  <BlogCard />
+               </div>
+            </div>
+         </section>
+         {/* blog section end */}
       </>
    );
 };
