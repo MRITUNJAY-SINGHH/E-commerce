@@ -369,6 +369,14 @@ p {
 .product-wrapper {
    margin-bottom: 5rem;
 }
+.product-img {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.product-img img {
+   width: 250px;
+}
 .product-card .product-details h6 {
    color: var(--color-bf4800);
    font-size: 0.9em;
@@ -388,17 +396,223 @@ p {
    right: 5%;
 }
 .action-bar img {
-   width: 25px;
+   width: 22px;
 }
 .wishlist-icon img {
-   width: 25px;
+   width: 22px;
 }
 .action-bar {
-   top: 15%;
-   right: -23px;
+   top: 12%;
+   right: -30px;
    transition: all ease-in-out 0.3s;
 }
 /*`Product Section end*/
+/*Special Offer Section Start*/
+.special-product-card {
+   padding: 20px 10px;
+   border-radius: 10px;
+   background: #fff;
+}
+.special-product-card .badge {
+   background-color: rgb(240, 34, 34) !important;
+   color: #000;
+}
+
+/*Special Offer Section End*/
+
+/*famous brand section start*/
+.famous-card .famous-content {
+   top: 10%;
+   left: 10%;
+}
+
+.famous-card {
+   box-shadow: inset 0 0 1px var(--color-131921);
+}
+.famous-content h5 {
+   font-size: 13px;
+   line-height: 20px;
+   font-weight: 400;
+   color: #000;
+   margin-bottom: 8px;
+}
+.famous-content h6 {
+   font-weight: 500;
+   color: #000;
+   font-size: 1.5em;
+   line-height: 32px;
+}
+.famous-content p {
+   font-size: 0.9em;
+   line-height: 20px;
+   font-weight: 400;
+   color: #000;
+}
+/*famous brand section end*/
+
+/*Our Store Start*/
+.filter-card {
+   background-color: #fff;
+   box-shadow: 0 0 1px var(--color-3b4149);
+   border-radius: 10px;
+   padding: 15px 15px 25px;
+}
+.filter-title {
+   font-size: 1.1rem !important;
+   line-height: 20px;
+   font-size: 600px;
+   margin-bottom: 1.2rem;
+   color: var(--color-1c1c1b);
+}
+.filter-card ul {
+   list-style-type: none;
+   font-size: 0.9rem;
+   line-height: 40px;
+   display: inline-block;
+   color: #3b4149;
+}
+.filter-card ul li {
+   cursor: pointer;
+}
+.filter-card .colors li {
+   padding: 0.8rem;
+}
+.filter-card .form-check {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.filter-card .form-check-label {
+   color: #3b4149;
+   font-size: 1rem;
+   margin-left: 1rem;
+   line-height: 30px;
+}
+.filter-card .form-check-input:focus {
+   outline: none;
+   box-shadow: none;
+}
+.sub-title {
+   font-size: 1rem;
+   font-weight: 600;
+   color: var(--color-1c1c1b);
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+}
+.colors li {
+   display: inline-block;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   margin-right: 5px;
+   cursor: pointer;
+   background: #000;
+}
+.random-products:first-child {
+   border-bottom: 2px solid var(--color-ededed);
+}
+.product-tags span {
+   min-width: 48%;
+   cursor: pointer;
+}
+.filter-sort-grid {
+   padding: 10px;
+   background: #fff;
+   border-radius: 10px;
+   box-shadow: 0 0 1px var(--color-3b4149);
+}
+.filter-sort-grid p {
+   width: 100px;
+}
+.grid img {
+   width: 30px;
+   height: 30px;
+   background-color: #f2f2f2;
+   padding: 8px;
+   border-radius: 4px;
+}
+/* grid 12 column */
+
+.gr-12 {
+   width: 100%;
+}
+.gr-12 img {
+   width: 240px;
+}
+.gr-12 .action-bar {
+   top: 16%;
+   display: inline-block;
+}
+
+.gr-12 .product-card .description {
+   color: #777777;
+   max-width: 80%;
+}
+.gr-12 .product-card {
+   display: flex;
+   gap: 10px;
+}
+
+.gr-12 .product-card:hover .action-bar {
+   right: 2%;
+}
+.gr-12 .action-bar img,
+.gr-12 .wishlist-icon img {
+   width: 22px;
+}
+.gr-12 .wishlist-icon {
+   right: 2%;
+}
+[className^='gr-'] .product-card {
+   margin-bottom: 1rem;
+   margin-top: 1rem;
+}
+/* grid 6 column */
+
+.gr-6 {
+   width: 33%;
+}
+.gr-6 .wishlist-icon img,
+.gr-6 .action-bar img {
+   width: 20px;
+}
+.gr-6 .action-bar {
+   top: 13%;
+}
+.gr-6 .product-img img {
+   width: 250px;
+}
+/* grid 4 column */
+
+.gr-4 {
+   width: 32%;
+}
+.gr-4 .wishlist-icon img,
+.gr-4 .action-bar img {
+   width: 20px;
+}
+.gr-4 .action-bar {
+   top: 13%;
+}
+.gr-4 .product-img img {
+   width: 210px;
+}
+/* grid 3 column */
+.gr-3 {
+   width: 24%;
+}
+.gr-3 .wishlist-icon img,
+.gr-3 .action-bar img {
+   width: 20px;
+}
+.gr-3 .action-bar {
+   top: 13%;
+}
+.gr-3 .product-img img {
+   width: 180px;
+}
+/*Our Store end*/
 /*Footer Page Start*/
 
 footer {

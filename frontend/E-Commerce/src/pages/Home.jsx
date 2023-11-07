@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Marquee from 'react-fast-marquee';
 import BlogCard from '../components/blogCard';
 import ProductCard from '../components/ProductCard';
+import SpecialProduct from '../components/specialProduct';
+import FamousCard from '../components/FamousCard';
 
 const Home = () => {
    return (
@@ -357,6 +359,59 @@ const Home = () => {
             </div>
          </section>
          {/* {section three end} */}
+         {/* feature wrapper Start */}
+         <section className='product-wrapper'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <h3 className='section-heading'>Features Collections</h3>
+                  </div>
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+               </div>
+            </div>
+         </section>
+         {/* {Features section  end} */}
+         {/* famous wrapper start */}
+         <section className='famous-wrapper py-5'>
+            <FamousCard />
+         </section>
+         {/* famous wrapper end */}
+         {/* special wrapper Start */}
+         <section className='special-Product pb-3'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <div className='section-heading'>Special Products</div>
+                  </div>
+               </div>
+
+               <div className='row'>
+                  <SpecialProduct />
+                  <SpecialProduct />
+                  <SpecialProduct />
+                  <SpecialProduct />
+               </div>
+            </div>
+         </section>
+         {/* special product end */}
+         {/* popular wrapper Start */}
+         <section className='popular-wrapper py-5'>
+            <div className='container-fluid'>
+               <div className='row'>
+                  <div className='col-12'>
+                     <h3 className='section-heading'>Our Popular Products</h3>
+                  </div>
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+                  <ProductCard />
+               </div>
+            </div>
+         </section>
+         {/* popular wrapper end */}
          <section className='marque-wrapper mb-5'>
             <div className='container-fluid'>
                <div className='row'>
@@ -394,19 +449,6 @@ const Home = () => {
             </div>
          </section>
          {/* {Marquee section  end} */}
-         <section className='blog-wrapper product-wrapper'>
-            <div className='container-fluid'>
-               <div className='row'>
-                  <div className='col-12'>
-                     <h3 className='section-heading'>Features Collections</h3>
-                  </div>
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
-               </div>
-            </div>
-         </section>
          <section className='blog-wrapper'>
             <div className='container-fluid'>
                <div className='row'>
