@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const BlogCard = () => {
    return (
-      <div className='col-3'>
+      <>
          <div className='blog-card'>
             <div className='card-img'>
                <img src='images/blog-1.jpg' alt='blog' className='img-fluid' />
@@ -14,12 +14,12 @@ const BlogCard = () => {
                   Check out our latest fall collection! With a variety of new
                   styles and colors, there's something for everyone.
                </p>
-               <Link className='button' to='#'>
+               <Link className='button' to='/blogs/:id'>
                   Read More
                </Link>
             </div>
          </div>
-      </div>
+      </>
    );
 };
 

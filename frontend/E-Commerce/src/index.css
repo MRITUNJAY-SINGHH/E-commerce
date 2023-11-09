@@ -7,6 +7,7 @@
 body {
    font-family: 'Rubik', sans-serif;
 }
+
 :root {
    --color-131921: #131921;
    --color-3b4149: #3b4149;
@@ -40,6 +41,7 @@ li {
 .gap-20 {
    gap: 20px;
 }
+
 .button {
    background-color: var(--color-232f3e);
    color: #fff;
@@ -125,25 +127,25 @@ li {
 /*Header Part End*/
 
 /*Home Part Start*/
+/* Existing styles */
 .custom-carousel-button {
    display: flex;
    position: absolute;
-   width: 40px;
+   width: 40px !important;
+   height: 80px !important;
    background-color: #000 !important;
-   height: 88px;
    top: 0;
    bottom: 0;
    margin: auto 0;
-   opacity: 1;
    box-shadow: none !important;
+}
+.carousel-control-next {
+   border-radius: 10px 0px 0px 10px;
+}
+.carousel-control-prev {
+   border-radius: 0px 10px 10px 0px;
 }
 
-.carousel-control-prev:hover {
-   box-shadow: none !important;
-}
-.carousel-control-next:hover {
-   box-shadow: none !important;
-}
 .flex {
    display: flex;
    justify-content: space-around;
@@ -317,12 +319,15 @@ p {
 /*Home Part End*/
 
 /* Blog Section Start*/
+
 .blog-card {
    background: #fff;
    border-radius: 10px;
    border-top-right-radius: 10px;
    border-top-left-radius: 10px;
+   box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.5);
 }
+
 .blog-content {
    padding: 1.1em;
    margin-bottom: 3rem;
@@ -355,6 +360,20 @@ p {
    line-height: 32px;
    font-weight: 500;
    margin-bottom: 2rem;
+}
+.background-color {
+   background-color: var(--color-f5f5f7);
+}
+.single-blog-card h3 {
+   font-size: 1.3rem;
+   font-weight: 500;
+   color: var(--color-1c1c1b);
+}
+.single-blog-card p {
+   font-size: 0.9rem;
+   line-height: 20px;
+   font-weight: 400;
+   color: #777777;
 }
 /* Blog Section end*/
 
@@ -612,7 +631,128 @@ p {
 .gr-3 .product-img img {
    width: 180px;
 }
+.blog-wrapper .blog-card .card-img img {
+   width: 100%;
+}
 /*Our Store end*/
+
+/*Contact Section Start*/
+.contact-inner-wrapper {
+   box-shadow: 0px -1px 10px 0px rgba(0, 0, 0, 0.5);
+   padding: 5px;
+   border-radius: 15px;
+   background-color: white;
+   margin-bottom: 2rem;
+   /* gap: 15px; */
+}
+.contact-inner-wrapper > div {
+   width: 48%;
+}
+.contact-title .form > div {
+   padding-top: 1rem;
+   padding-left: 1rem;
+}
+.form-section {
+   padding-top: 1rem;
+   padding-left: 1rem;
+   padding-bottom: 1rem;
+}
+.form-section .form-control {
+   border-radius: 10px;
+   background-color: #f7f7f7;
+   /* border-color: transparent; */
+}
+.contact-inner-wrapper address,
+.contact-inner-wrapper p {
+   color: #7c7c7c;
+}
+.contact-inner-wrapper ul li a {
+   color: #7c7c7c !important;
+}
+.form-section textarea {
+   resize: none;
+}
+/*Contact Section End*/
+/*compare-product start*/
+.compare-product-card {
+   padding: 20px 15px;
+   background-color: #fff;
+   border-radius: 10px;
+   box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.compare-product-card .cross,
+.wishlist-card .cross {
+   top: 5%;
+   right: 20px;
+   width: 25px;
+   cursor: pointer;
+   padding: 3px;
+}
+.compare-product-details .title,
+.wishlist-card .title {
+   font-size: 1.2em;
+   line-height: 24px;
+   font-weight: 500;
+   color: var(--color-1c1c1b);
+   margin-bottom: 0.5rem;
+}
+.compare-product-details .price .wishlist-card .price {
+   font-size: 1em;
+   line-height: 20px;
+   font-weight: 400;
+}
+.compare-product-card .product-details {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 16px 0px;
+   border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+.compare-product-card .product-details .colors {
+   margin: 0px;
+}
+/*compare-product end*/
+/*wishlist start*/
+
+.wishlist-img-card {
+   background-color: white;
+   padding: 10px 20px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+/*wishlist end*/
+/*Login and Signup start*/
+.Sign-up {
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+   font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+.gradient-custom-3 {
+   background: #84fab0;
+   background: -webkit-linear-gradient(
+      to right,
+      rgba(132, 250, 176, 0.5),
+      rgba(143, 211, 244, 0.5)
+   );
+
+   background: linear-gradient(
+      to right,
+      rgba(132, 250, 176, 0.5),
+      rgba(143, 211, 244, 0.5)
+   );
+}
+
+.Sign-up .login {
+   text-decoration: underline;
+   color: #0d131b;
+}
+.icon-eye {
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+}
+/*Login and Signup end*/
 /*Footer Page Start*/
 
 footer {

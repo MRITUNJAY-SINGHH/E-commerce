@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from 'react-fast-marquee';
-import BlogCard from '../components/blogCard';
+import BlogCard from '../components/BlogCard';
 import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/specialProduct';
 import FamousCard from '../components/FamousCard';
+import Meta from '../components/Meta';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const Home = () => {
    return (
       <>
+         <Meta title={'home'} />
+
          <section className='home-wrapper-1'>
             <div className='container-fluid'>
                <div className='row'>
@@ -23,13 +27,13 @@ const Home = () => {
                            <div className='carousel-item active'>
                               <img
                                  src='https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/78f0374b0191d762.jpg?q=100'
-                                 className='d-block w-100 custom-carousel-image' // Apply the custom CSS class
+                                 className='d-block w-100 custom-carousel-image'
                                  alt='Image 1'
                               />
                            </div>
                            <div className='carousel-item'>
                               <img
-                                 src='https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/01d585fee99375e8.png?q=100'
+                                 src='https://rukminim1.flixcart.com/fk-p-flap/1600/270/image/bb35af7b3673ec73.jpeg?q=100'
                                  className='d-block w-100 custom-carousel-image'
                                  alt='Image 2'
                               />
@@ -59,18 +63,14 @@ const Home = () => {
                         </div>
                         <div className='carousel-controls'>
                            <button
-                              className='carousel-control-prev bg custom-carousel-button'
+                              className='carousel-control-prev custom-carousel-button'
                               type='button'
                               data-bs-target='#mainBannerCarousel'
                               data-bs-slide='prev'
                            >
-                              <span
-                                 className='carousel-control-prev-icon bg'
-                                 aria-hidden='true'
-                              ></span>
-                              <span className='visually-hidden bg'>
-                                 Previous
-                              </span>
+                              <span className='visually-hidden'>Previous</span>
+                              {/* Add your custom icon */}
+                              <IoIosArrowBack />
                            </button>
                            <button
                               className='carousel-control-next custom-carousel-button'
@@ -78,11 +78,9 @@ const Home = () => {
                               data-bs-target='#mainBannerCarousel'
                               data-bs-slide='next'
                            >
-                              <span
-                                 className='carousel-control-next-icon'
-                                 aria-hidden='true'
-                              ></span>
-                              <span className='visually-hidden'>Next</span>
+                              <IoIosArrowForward />
+                              <span className='visually-hidden'></span>
+                              {/* Add your custom icon */}
                            </button>
                         </div>
                      </div>
@@ -455,10 +453,20 @@ const Home = () => {
                   <div className='col-12'>
                      <h3 className='section-heading'>Our Latest Blogs</h3>
                   </div>
-                  <BlogCard />
-                  <BlogCard />
-                  <BlogCard />
-                  <BlogCard />
+               </div>
+               <div className='row'>
+                  <div className='col-3'>
+                     <BlogCard />
+                  </div>
+                  <div className='col-3'>
+                     <BlogCard />
+                  </div>
+                  <div className='col-3'>
+                     <BlogCard />
+                  </div>
+                  <div className='col-3'>
+                     <BlogCard />
+                  </div>
                </div>
             </div>
          </section>

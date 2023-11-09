@@ -56,8 +56,10 @@ const Header = () => {
                   <div className='col-5'>
                      <div className='headers-upper-links d-flex justify-content-between align-items-center'>
                         <div>
-                           <Link className='d-flex align-items-center gap-10 text-white'>
-                              {/* <img src='/images/compare.svg' alt='' /> */}
+                           <Link
+                              to='/compare-products'
+                              className='d-flex align-items-center gap-10 text-white'
+                           >
                               <IoMdGitCompare
                                  className='text-white fs-5'
                                  size={28}
@@ -68,7 +70,10 @@ const Header = () => {
                            </Link>
                         </div>
                         <div>
-                           <Link className='d-flex align-items-center gap-10 text-white'>
+                           <Link
+                              to='/wishlist'
+                              className='d-flex  align-items-center gap-10 text-white'
+                           >
                               <img
                                  src='/images/wishlist.svg'
                                  alt='wishlist-icon'
@@ -81,7 +86,10 @@ const Header = () => {
                            </Link>
                         </div>
                         <div>
-                           <Link className='d-flex align-items-center gap-10 text-white'>
+                           <Link
+                              to='/Login'
+                              className='d-flex align-items-center gap-10 text-white'
+                           >
                               <img src='/images/user.svg' alt='user-icon' />
 
                               <p className='mb-0'>
@@ -90,7 +98,10 @@ const Header = () => {
                            </Link>
                         </div>
                         <div>
-                           <Link className='d-flex align-items-center gap-10 text-white'>
+                           <Link
+                              to='/cart'
+                              className='d-flex align-items-center gap-10 text-white'
+                           >
                               <img src='/images/cart.svg' alt='cart-icon' />
                               <div className='d-flex flex-column gap-10'>
                                  <span className='badge text-dark bg-white'>
