@@ -1,2 +1,5 @@
 node_modules/
 .env
+Admin-App/Admin/package-lock.json
+Admin-App/Admin/README.md
+Admin-App/Admin/public/vite.svg

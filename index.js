@@ -1,5 +1,6 @@
 const express = require('express');
 const dbConnect = require('./config/dbConnect');
+const cors = require('cors');
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 const bodyParser = require('body-parser');
@@ -18,6 +19,7 @@ const morgan = require('morgan');
 const app = express();
 
 dbConnect(); // Connect to the database
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

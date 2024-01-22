@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Roboto', sans-serif;
+}
+
+.trigger {
+   font-size: 18px;
+   line-height: 64px;
+   padding: 0 24px;
+   cursor: pointer;
+   transition: color 0.3s;
+}
+.trigger:hover {
+   color: #1890ff;
+}
+.logo {
+   height: 32px;
+   margin: 16px;
+   background: rgba(255, 255, 255, 0.2);
+}
+.ant-layout {
+   min-height: 100vh;
+}

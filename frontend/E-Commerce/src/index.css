@@ -372,8 +372,17 @@ p {
 .single-blog-card p {
    font-size: 0.9rem;
    line-height: 20px;
-   font-weight: 400;
    color: #777777;
+}
+.single-blog-card a {
+   font-size: 1rem;
+   color: #777777;
+   font-weight: 500;
+}
+.single-blog-card a:hover {
+   background-color: initial;
+   color: #777777;
+   box-shadow: none;
 }
 /* Blog Section end*/
 
