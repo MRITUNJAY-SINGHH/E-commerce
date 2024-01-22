@@ -46,9 +46,10 @@ authRouter.get('/cart', authMiddleware, getUserCart);
 authRouter.get('/:id', authMiddleware, isAdmin, getOneUsers);
 authRouter.delete('/empty', authMiddleware, emptyCart);
 authRouter.delete('/:id', deleteUser);
-module.exports = authRouter;
 
 authRouter.put('/edit-user', authMiddleware, updateUser);
 authRouter.put('/address', authMiddleware, saveAddress);
 authRouter.put('/block-user/:id', authMiddleware, isAdmin, blockUser);
 authRouter.put('/unblock-user/:id', authMiddleware, isAdmin, unblockUser);
+
+module.exports = authRouter;

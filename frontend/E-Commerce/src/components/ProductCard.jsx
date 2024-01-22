@@ -18,7 +18,7 @@ const ProductCard = (props) => {
                </div>
                <div className='product-img'>
                   <img
-                     src='https://lojaqueroquero.vtexassets.com/arquivos/ids/3351057/ns_193401_1.jpg?v=1781716126'
+                     src='https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRJ8coheZfJ2NrOOaQqSGjq7pq6R-mqSd9Kv0in_GZzFmlccoY'
                      alt='product-img'
                   />
                </div>
