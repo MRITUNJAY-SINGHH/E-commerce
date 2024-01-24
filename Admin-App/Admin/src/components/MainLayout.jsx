@@ -47,9 +47,9 @@ const MainLayout = () => {
       token: { colorBgContainer, borderRadiusLG },
    } = theme.useToken();
 
-   const iconStyle = { fontSize: '22px' };
+   const iconStyle = { fontSize: '20px' };
    const menuStyle = {
-      fontSize: '18px',
+      fontSize: '16px',
    };
    const handleMenuClick = ({ key }) => {
       if (key === 'signOut') {

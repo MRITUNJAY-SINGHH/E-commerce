@@ -31,7 +31,18 @@
    min-width: 80px !important;
    width: 80px !important;
 }
-
 main {
-   overflow-y: scroll;
+   background-color: transparent !important;
+   overflow-y: scroll !important;
+   height: 85vh !important;
+}
+main::-webkit-scrollbar {
+   width: 0px !important;
+}
+.table-row-light {
+   background-color: #f9f9f9;
+}
+
+.table-row-dark {
+   background-color: #e8e8e8;
 }
