@@ -101,7 +101,7 @@ const MainLayout = () => {
 
    const menuItems = [
       {
-         key: '1',
+         key: '',
          icon: <DashboardOutlined style={iconStyle} />,
          label: 'Dashboard',
       },
@@ -163,11 +163,6 @@ const MainLayout = () => {
          icon: <ShoppingOutlined style={iconStyle} />,
          label: 'Orders',
       },
-      {
-         key: 'enquires',
-         icon: <QuestionCircleOutlined style={iconStyle} />,
-         label: 'Enquires',
-      },
 
       {
          key: 'Blog',
@@ -190,11 +185,16 @@ const MainLayout = () => {
                label: 'Add Blog Category',
             },
             {
-               key: 'add-blog-list-category',
+               key: 'blog-list-category',
                icon: <FolderAddOutlined style={iconStyle} />,
-               label: 'Add Blog List Category',
+               label: 'Blog List Category',
             },
          ],
+      },
+      {
+         key: 'enquires',
+         icon: <QuestionCircleOutlined style={iconStyle} />,
+         label: 'Enquires',
       },
    ];
 

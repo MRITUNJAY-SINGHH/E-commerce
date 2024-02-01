@@ -3,3 +3,8 @@ node_modules/
 Admin-App/Admin/package-lock.json
 Admin-App/Admin/README.md
 Admin-App/Admin/public/vite.svg
+.idea/E-commerce.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/modules.xml
+.idea/.gitignore
