@@ -12,13 +12,13 @@ const AddBlog = () => {
                type='text'
                id='blogTitle'
                placeholder='Enter Blog Title'
-               className='appearance-none  relative block w-full px-6 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+               className='appearance-none relative block w-full px-6 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-lg'
             />
             <select
                id='blogCategory'
                name='blogCategory'
                required
-               className='appearance-none rounded-md relative block w-full px-6 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+               className='appearance-none rounded-md relative block w-full px-6 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg'
             >
                <option value=''>Select Blog Category</option>
                <option value='tech'>Tech</option>

@@ -15,7 +15,7 @@ const Dashboard = () => {
             <div>
                <h3 className='text-3xl font-semibold'>Dashboard</h3>
             </div>
-            <div className='bg-white p-4 rounded-md'>
+            <div className=' p-4 rounded-md'>
                <div className='text-gray-600'>
                   <h4 className='mb-1 text-sm font-semibold'>Select Date</h4>
                   <DatePicker
@@ -89,12 +89,13 @@ const Dashboard = () => {
                </Card>
             </Col>
          </Row>
-         <div className='mt-4'>
-            <h3 className='text-3xl font-semibold mb-3'>Income Statics</h3>
+
+         <div className='mt-4 flex-grow'>
+            <h3 className='text-3xl font-semibold mb-5'>Income Statics</h3>
             <ChartColumn />
          </div>
-         <div className='mt-4'>
-            <h3 className='text-3xl font-semibold mb-3'>Recent Orders</h3>
+         <div className='mt-4 flex-grow'>
+            <h3 className='text-3xl font-semibold mb-5 '>Recent Orders</h3>
             <TableLayout />
          </div>
       </>

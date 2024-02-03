@@ -1,5 +1,6 @@
 import TableLayout from '../layout/Table';
-
+import { BiEdit } from 'react-icons/bi';
+import { AiFillDelete } from 'react-icons/ai';
 const ProductList = () => {
    return (
       <div>
