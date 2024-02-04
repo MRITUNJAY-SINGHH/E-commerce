@@ -57,7 +57,7 @@ export const ChartColumn = () => {
       yField: 'sales',
       color: '#fffd33',
       label: {
-         position: 'middle',
+         // position: 'middle',
 
          style: {
             fill: '#FFFFFF',

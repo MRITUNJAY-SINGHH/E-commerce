@@ -19,10 +19,25 @@ import AddColor from './Pages/AddColor';
 import AddCategories from './Pages/AddCategories';
 import AddBrand from './Pages/AddBrand';
 import AddProduct from './Pages/AddProduct';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
    return (
       <Router>
+         <ToastContainer
+            position='top-right'
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='light'
+            transition={Slide}
+         />
          <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/reset-password' element={<ResetPassword />} />

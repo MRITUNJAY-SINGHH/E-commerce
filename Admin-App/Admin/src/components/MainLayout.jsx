@@ -49,7 +49,7 @@ const MainLayout = () => {
 
    const iconStyle = { fontSize: '25px' };
    const menuStyle = {
-      fontSize: '20px',
+      fontSize: '17px',
    };
    const handleMenuClick = ({ key }) => {
       if (key === 'signOut') {

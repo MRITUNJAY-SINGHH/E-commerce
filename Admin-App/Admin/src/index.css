@@ -35,6 +35,10 @@
    min-width: 80px !important;
    width: 80px !important;
 }
+.ant-menu-item {
+   margin-top: 18px !important;
+   margin-bottom: 18px !important;
+}
 
 main {
    background-color: transparent !important;

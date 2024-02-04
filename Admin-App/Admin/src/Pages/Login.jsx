@@ -1,11 +1,46 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CustomInput from '../components/CustomInput';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import google from '../assets/google.svg';
 import github from '../assets/GitHub-Logo.wine.svg';
 import facebook from '../assets/Facebook-f_Logo-Blue-Logo.wine.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../features/auth/AuthSlice';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const Login = () => {
+   const dispatch = useDispatch();
+   const { isLoading, isAuthenticated, error } = useSelector(
+      (state) => state.auth
+   );
+   const navigate = useNavigate();
+
+   const formik = useFormik({
+      initialValues: {
+         email: '',
+         password: '',
+      },
+      validationSchema: Yup.object({
+         email: Yup.string()
+            .email('Invalid email address')
+            .required('Email is required'),
+         password: Yup.string().required('Password is required'),
+      }),
+      onSubmit: async (userData) => {
+         dispatch(loginUser(userData));
+      },
+   });
+   useEffect(() => {
+      if (isAuthenticated) {
+         toast.success('Login Successfully');
+         setTimeout(() => navigate('/admin'), 1000);
+      } else {
+         toast.error(error);
+      }
+   }, [isLoading, isAuthenticated, error, navigate]);
+
    return (
       <div className='flex items-center justify-center h-screen bg-[#ffd333] px-15 py-6'>
          <div className='w-[25%] p-5 bg-white rounded-md space-y-4'>
@@ -13,27 +48,46 @@ const Login = () => {
             <p className='text-center'>
                Enter your details below to access your account.
             </p>
-            <form action='' className='space-y-4'>
+
+            <form onSubmit={formik.handleSubmit} className='space-y-4'>
                <CustomInput
                   type='email'
+                  name='email'
                   placeholder='Email Your Email'
                   id='email'
                   label='Email'
+                  value={formik.values.email}
+                  onChange={formik.handleChange('email')}
+                  onBlur={formik.handleBlur('email')}
                />
+               {formik.touched.email && formik.errors.email ? (
+                  <div style={{ color: 'red', margin: '0' }}>
+                     {formik.errors.email}
+                  </div>
+               ) : null}
+
                <CustomInput
                   type='password'
+                  name='password'
                   placeholder='Enter Your Password'
                   id='password'
                   label='Password'
+                  value={formik.values.password}
+                  onChange={formik.handleChange('password')}
+                  onBlur={formik.handleBlur('password')}
                />
-               <Link to='/admin'>
-                  <button
-                     className='border-0 px-3 py-2 bg-[#ffd333] text-white font-bold w-full'
-                     type='submit'
-                  >
-                     Login
-                  </button>
-               </Link>
+               {formik.touched.password && formik.errors.password ? (
+                  <div style={{ color: 'red', margin: '0' }}>
+                     {formik.errors.password}
+                  </div>
+               ) : null}
+
+               <button
+                  className='border-0 px-3 py-2 bg-[#ffd333] text-white font-bold w-full'
+                  type='submit'
+               >
+                  Login
+               </button>
             </form>
             <div className='flex items-start space-x-4'>
                <div className='flex items-center h-5'>
