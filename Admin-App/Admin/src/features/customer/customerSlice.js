@@ -13,6 +13,7 @@ export const getUsers = createAsyncThunk(
       try {
          const response = await customerService.getUsers();
          const filteredCustomers = response.map((customer) => ({
+            id: customer._id,
             name: `${customer.firstname} ${customer.lastname}`,
             email: customer.email,
             mobile: customer.mobile,

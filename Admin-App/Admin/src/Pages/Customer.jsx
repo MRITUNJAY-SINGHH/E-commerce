@@ -9,8 +9,8 @@ const Customer = () => {
 
    const defaultColumns = [
       {
-         title: 'Sno',
-         dataIndex: 'key',
+         title: 'ID',
+         dataIndex: 'id',
       },
       {
          title: 'Name',

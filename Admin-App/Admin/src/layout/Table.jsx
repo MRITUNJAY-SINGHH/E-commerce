@@ -15,15 +15,19 @@ const TableLayout = ({ data, columns }) => {
    });
 
    const formattedData = useMemo(() => {
-      return data.map((customer, index) => ({
-         key: index + 1,
-         name: customer.name,
-         mobile: customer.mobile,
-         email: customer.email,
-      }));
-   }, [data]);
+      return data.map((product, index) => {
+         const formattedProduct = { key: index + 1 };
+         columns.forEach((col) => {
+            if (col.dataIndex) {
+               formattedProduct[col.dataIndex] = product[col.dataIndex];
+            }
+         });
 
-   const handleTableChange = (pagination, filters, sorter) => {
+         return formattedProduct;
+      });
+   }, [data, columns]);
+
+   const handleTableChange = (pagination, sorter) => {
       setSortedInfo(sorter);
       setPaginationState(pagination);
    };
@@ -59,15 +63,20 @@ const TableLayout = ({ data, columns }) => {
    const filteredData = useMemo(() => {
       if (searchText) {
          const searchTextLower = searchText.toLowerCase();
-         return sortedData.filter(
-            (customer) =>
-               customer.name.toLowerCase().includes(searchTextLower) ||
-               customer.email.toLowerCase().includes(searchTextLower) ||
-               customer.mobile.toString().includes(searchTextLower)
+         return sortedData.filter((customer) =>
+            columns.some(
+               (col) =>
+                  col.dataIndex &&
+                  customer[col.dataIndex] &&
+                  customer[col.dataIndex]
+                     .toString()
+                     .toLowerCase()
+                     .includes(searchTextLower)
+            )
          );
       }
       return sortedData;
-   }, [searchText, sortedData]);
+   }, [searchText, sortedData, columns]);
 
    return (
       <div>
