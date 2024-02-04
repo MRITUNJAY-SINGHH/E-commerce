@@ -12,7 +12,12 @@ export const getUsers = createAsyncThunk(
    async (thunkAPI) => {
       try {
          const response = await customerService.getUsers();
-         return response;
+         const filteredCustomers = response.map((customer) => ({
+            name: `${customer.firstname} ${customer.lastname}`,
+            email: customer.email,
+            mobile: customer.mobile,
+         }));
+         return filteredCustomers;
       } catch (error) {
          return thunkAPI.rejectWithValue(error);
       }

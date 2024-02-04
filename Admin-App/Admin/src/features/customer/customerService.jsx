@@ -3,7 +3,7 @@ import { base_url } from '../../utils/base_url';
 
 const getUsers = async () => {
    try {
-      const response = await axios.post(`${base_url}user/allUser`);
+      const response = await axios.get(`${base_url}user/allUser`);
       return response.data;
    } catch (error) {
       if (error.response) {
