@@ -16,7 +16,7 @@ const CategoryList = () => {
          dataIndex: '_id',
       },
       {
-         title: 'Title',
+         title: 'Category Name',
          dataIndex: 'title',
          key: 'title',
       },

@@ -15,7 +15,7 @@ const BrandList = () => {
          dataIndex: '_id',
       },
       {
-         title: 'Title',
+         title: 'Brand Name',
          dataIndex: 'title',
          key: 'title',
       },
