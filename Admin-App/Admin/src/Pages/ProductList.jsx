@@ -12,7 +12,7 @@ const ProductList = () => {
    const defaultColumns = [
       {
          title: 'ID',
-         dataIndex: 'id',
+         dataIndex: '_id',
       },
       {
          title: 'Title',

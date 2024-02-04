@@ -96,7 +96,7 @@ const Dashboard = () => {
          </div>
          <div className='mt-4 flex-grow'>
             <h3 className='text-3xl font-semibold mb-5 '>Recent Orders</h3>
-            <TableLayout />
+            {/* <TableLayout /> */}
          </div>
       </>
    );

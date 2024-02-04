@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { base_url } from '../../utils/base_url';
 
-const getAllBrands = async () => {
+const getAllBlogCategories = async () => {
    try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.get(`${base_url}brand`, {
+      const response = await axios.get(`${base_url}blogcategory`, {
          headers: {
             Authorization: `Bearer ${token}`,
          },
@@ -21,8 +21,8 @@ const getAllBrands = async () => {
    }
 };
 
-const brandService = {
-   getAllBrands,
+const blogCategoryService = {
+   getAllBlogCategories,
 };
 
-export default brandService;
+export default blogCategoryService;

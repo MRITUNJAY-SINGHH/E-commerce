@@ -5,7 +5,7 @@ import Link from 'antd/es/typography/Link';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { getAllBrands } from '../features/brand/brandSlice';
 
-const ProductList = () => {
+const BrandList = () => {
    const dispatch = useDispatch();
    const { brand } = useSelector((state) => state.brand);
 
@@ -48,4 +48,4 @@ const ProductList = () => {
    );
 };
 
-export default ProductList;
+export default BrandList;
