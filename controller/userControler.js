@@ -475,7 +475,7 @@ const createOrder = asyncHandler(async (req, res) => {
             status: 'Cash On Delivery',
             created: Date.now(),
          },
-         orderby: User._id,
+         orderby: user._id,
          orderStatus: 'Cash On Delivery',
       }).save();
       let bulkOption = userCart.products.map((item) => {
@@ -503,12 +503,27 @@ const getOrders = asyncHandler(async (req, res) => {
    try {
       const orders = await Order.find({ orderby: _id })
          .populate('products.product')
+         .populate('orderby')
          .exec();
       res.json(orders);
    } catch (error) {
       throw new Error(error);
    }
 });
+//get All Orders
+
+const getAllOrders = asyncHandler(async (req, res) => {
+   try {
+      const orders = await Order.find()
+         .populate('products.product')
+         .populate('orderby')
+         .exec();
+      res.json(orders);
+   } catch (error) {
+      throw new Error(error);
+   }
+});
+
 //Update order Status
 const updateOrderStatus = asyncHandler(async (req, res) => {
    const { status } = req.body;
@@ -550,6 +565,7 @@ module.exports = {
    userCart,
    getUserCart,
    emptyCart,
+   getAllOrders,
    applyCoupon,
    createOrder,
    getOrders,

@@ -25,7 +25,7 @@ let orderSchema = new mongoose.Schema(
             'Completed',
          ],
       },
-      orderby: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+      orderby: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
    },
    { timestamps: true }
 );
