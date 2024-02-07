@@ -8,7 +8,6 @@ import { getAllCategory } from '../features/category/categorySlice';
 const CategoryList = () => {
    const dispatch = useDispatch();
    const { category } = useSelector((state) => state.category);
-   console.log(category);
 
    const defaultColumns = [
       {

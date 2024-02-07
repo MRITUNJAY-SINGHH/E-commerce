@@ -15,6 +15,9 @@ const TableLayout = ({ data, columns }) => {
    });
 
    const formattedData = useMemo(() => {
+      if (!data || !Array.isArray(data)) {
+         return [];
+      }
       return data.map((product, index) => {
          const formattedProduct = { key: index + 1 };
          columns.forEach((col) => {
