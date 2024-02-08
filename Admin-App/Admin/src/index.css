@@ -40,6 +40,26 @@
    margin-top: 18px !important;
    margin-bottom: 18px !important;
 }
+.ant-select-selector {
+   border-radius: 5px !important;
+   padding: 0.5rem 0.8rem !important;
+}
+.ant-select-selection-overflow-item {
+   font-size: 18px !important;
+}
+.ant-select-selection-placeholder {
+   font-size: 18px !important;
+   padding-left: 1rem;
+   color: black !important;
+}
+
+.ant-select-item-option {
+   font-size: 18px !important;
+}
+.ant-select-arrow {
+   color: black !important;
+   font-size: 15px !important;
+}
 
 main {
    background-color: transparent !important;

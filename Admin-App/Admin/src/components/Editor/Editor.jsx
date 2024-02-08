@@ -4,10 +4,11 @@ import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
 
-export const Editor = ({ placeholder }) => {
+export const Editor = ({ placeholder, setFieldValue, name }) => {
    const [state, setState] = React.useState({ value: null });
    const handleChange = (value) => {
       setState({ value });
+      setFieldValue(name, value);
    };
    return (
       <div className='text-editor'>
