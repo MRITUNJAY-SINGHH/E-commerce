@@ -1,7 +1,4 @@
 import { Quill } from 'react-quill';
-import ImageResize from 'quill-image-resize';
-
-Quill.register('modules/imageResize', ImageResize);
 
 const CustomUndo = () => (
    <svg viewBox='0 0 18 18'>
@@ -46,9 +43,6 @@ export const modules = {
       delay: 500,
       maxStack: 100,
       userOnly: true,
-   },
-   imageResize: {
-      displaySize: true,
    },
 };
 

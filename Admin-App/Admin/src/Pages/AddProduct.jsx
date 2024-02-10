@@ -1,14 +1,13 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Editor from '../components/Editor/Editor';
-import { InboxOutlined } from '@ant-design/icons';
-import { message, Select, Upload } from 'antd';
+import { Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBrands } from '../features/brand/brandSlice';
 import { getAllCategory } from '../features/category/categorySlice';
 import { getAllColors } from '../features/color/colorSlice';
-const { Dragger } = Upload;
+import CustomUploadImages from '../components/CustomUploadImages';
 
 const AddProduct = () => {
    const Dispatch = useDispatch();
@@ -30,26 +29,6 @@ const AddProduct = () => {
    const handleChange = (value, setFieldValue) => {
       setSelectedItems(value);
       setFieldValue('productColor', value);
-   };
-
-   const props = {
-      name: 'file',
-      multiple: true,
-      action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
-      onChange(info) {
-         const { status } = info.file;
-         if (status !== 'uploading') {
-            console.log('uploading');
-         }
-         if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-         } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-         }
-      },
-      onDrop(e) {
-         console.log('Dropped files', e.dataTransfer.files);
-      },
    };
 
    const validationSchema = Yup.object({
@@ -257,17 +236,7 @@ const AddProduct = () => {
                         </div>
                      )}
                   </ErrorMessage>
-
-                  <Dragger {...props} style={{ marginTop: '2rem' }}>
-                     <p className='ant-upload-drag-icon'>
-                        <InboxOutlined />
-                     </p>
-                     <p className='ant-upload-text'>
-                        Click or drag file to this area to upload
-                     </p>
-                     <p className='ant-upload-hint'></p>
-                  </Dragger>
-
+                  <CustomUploadImages />
                   <button
                      type='submit'
                      disabled={isSubmitting}

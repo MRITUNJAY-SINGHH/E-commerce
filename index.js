@@ -15,6 +15,7 @@ const brandRouter = require('./routes/brandRouter');
 const couponRouter = require('./routes/couponRouter');
 const colorRoute = require('./routes/colorRoute');
 const enquiryRoute = require('./routes/enqRouter');
+const uploadRoute = require('./routes/uploadRouter');
 const morgan = require('morgan');
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/brand', brandRouter);
 app.use('/api/coupon', couponRouter);
 app.use('/api/color', colorRoute);
 app.use('/api/enquiry', enquiryRoute);
+app.use('/api/upload', uploadRoute);
 
 app.use(notfound);
 app.use(errorHandlingApi);

@@ -32,44 +32,6 @@ const getProduct = asyncHandler(async (req, res) => {
       throw new Error(error);
    }
 });
-//get All Product
-
-// const allProduct = asyncHandler(async (req, res) => {
-//    try {
-//       // Copy all query parameters to objQuery
-//       const objQuery = { ...req.query }
-
-//       // Define an array of fields to exclude from objQuery
-//       const excludeFields = ['page', 'sort', 'limit', 'fields']
-
-//       // Remove excluded fields from objQuery
-//       excludeFields.forEach((el) => delete objQuery[el])
-
-//       // Attempt to convert objQuery to JSON format (this is unnecessary)
-//       let queryString = JSON.stringify(objQuery)
-
-//       // Replace certain keywords like 'gte', 'gt', 'lt', and 'lte' with '$' versions
-//       queryString = queryString.replace(
-//          /\b(gte|gt|lt|lte)\b/g,
-//          (match) => `$${match}`
-//       )
-
-//       // Attempt to parse queryString as JSON, which may not be needed
-//       // Instead, you can use objQuery directly to build your query
-
-//       // Construct a MongoDB query based on objQuery
-//       const query = Product.find(objQuery)
-
-//       // Execute the query
-//       const product = await query
-
-//       // Send the product data as a JSON response
-//       res.json(product)
-//    } catch (error) {
-//       // If an error occurs, throw a new error
-//       throw new Error(error)
-//    }
-// })
 
 //Update Product
 
@@ -210,37 +172,6 @@ const rating = asyncHandler(async (req, res) => {
       throw new Error(error);
    }
 });
-//upload images
-const uploadImages = asyncHandler(async (req, res) => {
-   try {
-      const uploader = async (path) =>
-         await cloudinaryUploadImg(path, 'images');
-      const urls = [];
-      const files = req.files;
-      for (const file of files) {
-         const { path } = file;
-         const newPath = await uploader(path);
-         urls.push(newPath);
-         fs.unlinkSync(path);
-      }
-      const images = urls.map((file) => {
-         return file;
-      });
-      res.json(images);
-   } catch (error) {
-      throw new Error(error);
-   }
-});
-//delete images
-const deleteImages = asyncHandler(async (req, res) => {
-   const { id } = req.params;
-   try {
-      const deleted = await cloudinaryDeleteImg(id, 'images');
-      res.json({ message: 'Deleted' });
-   } catch (error) {
-      throw new Error(error);
-   }
-});
 
 module.exports = {
    createProduct,
@@ -250,7 +181,4 @@ module.exports = {
    deleteProduct,
    addToWishlist,
    rating,
-   uploadImages,
-   deleteImages,
 };
-cloudinaryDeleteImg;
