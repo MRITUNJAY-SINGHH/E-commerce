@@ -2,7 +2,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Editor from '../components/Editor/Editor';
 import { Select } from 'antd';
-const { Option } = Select;
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
