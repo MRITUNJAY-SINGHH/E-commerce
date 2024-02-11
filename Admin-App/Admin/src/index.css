@@ -95,6 +95,19 @@ main::-webkit-scrollbar {
    background-color: #fff;
    border-bottom: 1px solid #ccc;
 }
-.Dragger {
-   margin-top: 5rem !important;
+.ant-upload {
+   width: 100% !important;
+}
+.ant-upload-list {
+   display: flex !important;
+   flex-direction: row !important;
+   flex-wrap: wrap !important;
+   justify-content: flex-start !important;
+}
+.ant-upload-list-item-container {
+   width: 200px !important;
+   height: 161px !important;
+}
+.ant-upload-list-item {
+   border: 1px solid #ccc !important;
 }

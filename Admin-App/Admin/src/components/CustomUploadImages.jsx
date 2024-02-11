@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, Spin } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImages } from '../features/upload/uploadSlice';
+import { deleteImages, uploadImages } from '../features/upload/uploadSlice';
 import { message } from 'antd';
 
 const getBase64 = (file) =>
@@ -16,6 +16,7 @@ const getBase64 = (file) =>
 const CustomUploadImages = () => {
    const dispatch = useDispatch();
    const isLoading = useSelector((state) => state.upload.isLoading);
+   const [operation, setOperation] = useState('Upload');
    const [previewOpen, setPreviewOpen] = useState(false);
    const [previewImage, setPreviewImage] = useState('');
    const [previewTitle, setPreviewTitle] = useState('');
@@ -35,19 +36,48 @@ const CustomUploadImages = () => {
    };
 
    const handleChange = ({ fileList: newFileList }) => {
-      if (newFileList.length > 8)
-         return message.error('You can only upload 8 images');
-      else {
-         setFileList(newFileList);
-         message.success('Image uploaded successfully');
+      if (newFileList.length > 8) {
+         message.error('You can only upload 8 images');
+         return false;
+      }
+      setFileList(newFileList);
+   };
+
+   const handleRemove = async (file) => {
+      if (file.public_id) {
+         setOperation('Delete');
+         try {
+            await dispatch(deleteImages(file.public_id));
+            setFileList((prevFileList) =>
+               prevFileList.filter((item) => item !== file)
+            );
+            message.success('Image deleted successfully');
+         } catch (error) {
+            message.error('Failed to delete image');
+         }
+         setOperation('Upload');
       }
    };
 
    const handleUpload = async (file) => {
+      const fileSizeLimit = 1;
+      if (file.size / 1024 / 1024 > fileSizeLimit) {
+         message.error(`File size must be less than ${fileSizeLimit}MB`);
+         return Upload.LIST_IGNORE;
+      }
+      if (fileList.length >= 8) {
+         message.error('You can only upload 8 images');
+         return false;
+      }
+      setOperation('Upload');
       try {
-         dispatch(uploadImages(file));
+         const response = await dispatch(uploadImages(file));
+         if (uploadImages.fulfilled.match(response)) {
+            file.public_id = response.payload[0].public_id;
+            setFileList((prevFileList) => [...prevFileList, file]);
+            message.success('Image uploaded successfully');
+         }
       } catch (error) {
-         console.error('Compression failed:', error);
          message.error('Image upload failed');
       }
       return false;
@@ -56,7 +86,7 @@ const CustomUploadImages = () => {
    const uploadButton = (
       <div>
          {isLoading ? <Spin /> : <PlusOutlined />}
-         <div style={{ marginTop: 8 }}>Upload</div>
+         <div style={{ marginTop: 8 }}>{operation}</div>
       </div>
    );
 
@@ -67,18 +97,20 @@ const CustomUploadImages = () => {
             fileList={fileList}
             onPreview={handlePreview}
             onChange={handleChange}
+            onRemove={handleRemove}
             beforeUpload={handleUpload}
-            multiple
+            multiple={false}
             accept='image/*'
          >
             {fileList.length >= 8 ? null : uploadButton}
          </Upload>
+
          <Modal
             open={previewOpen}
             title={previewTitle}
             footer={null}
             onCancel={handleCancel}
-            width={1080}
+            width={800}
          >
             <img
                alt='example'
