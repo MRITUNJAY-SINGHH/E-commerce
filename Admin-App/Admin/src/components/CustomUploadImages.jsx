@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, Spin } from 'antd';
@@ -13,9 +14,10 @@ const getBase64 = (file) =>
       reader.onerror = (error) => reject(error);
    });
 
-const CustomUploadImages = () => {
+const CustomUploadImages = ({ setFieldValue }) => {
    const dispatch = useDispatch();
    const isLoading = useSelector((state) => state.upload.isLoading);
+   const upload = useSelector((state) => state.upload.upload);
    const [operation, setOperation] = useState('Upload');
    const [previewOpen, setPreviewOpen] = useState(false);
    const [previewImage, setPreviewImage] = useState('');
@@ -23,6 +25,11 @@ const CustomUploadImages = () => {
    const [fileList, setFileList] = useState([]);
 
    const handleCancel = () => setPreviewOpen(false);
+
+   const images = [];
+   upload.flat().map((item) => {
+      images.push({ public_id: item.public_id, url: item.url });
+   });
 
    const handlePreview = async (file) => {
       if (!file.url && !file.preview) {
@@ -41,6 +48,7 @@ const CustomUploadImages = () => {
          return false;
       }
       setFileList(newFileList);
+      setFieldValue('images', images);
    };
 
    const handleRemove = async (file) => {
