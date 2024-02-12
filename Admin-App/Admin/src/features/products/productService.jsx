@@ -11,6 +11,7 @@ const getAllProducts = async () => {
             Authorization: `Bearer ${token}`,
          },
       });
+
       return response.data;
    } catch (error) {
       if (error.response) {
