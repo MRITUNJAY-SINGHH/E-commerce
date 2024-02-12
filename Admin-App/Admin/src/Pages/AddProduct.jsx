@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Editor from '../components/Editor/Editor';
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { getAllCategory } from '../features/category/categorySlice';
 import { getAllColors } from '../features/color/colorSlice';
 import CustomUploadImages from '../components/CustomUploadImages';
 import { createProduct } from '../features/products/productSlice';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 const AddProduct = () => {
    const Dispatch = useDispatch();
@@ -19,6 +20,7 @@ const AddProduct = () => {
    const { category } = useSelector((state) => state.category);
    const { color } = useSelector((state) => state.color);
    const [selectedItems, setSelectedItems] = useState([]);
+   const [formKey, setFormKey] = useState(0);
 
    const colors = [];
    color.map((item) => {
@@ -67,6 +69,7 @@ const AddProduct = () => {
             Add Product
          </h3>
          <Formik
+            key={formKey}
             initialValues={{
                title: '',
                description: '',
@@ -78,8 +81,28 @@ const AddProduct = () => {
                images: [],
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => {
-               Dispatch(createProduct(values));
+            onSubmit={async (values, { setSubmitting, setFieldValue }) => {
+               try {
+                  const actionResult = await Dispatch(createProduct(values));
+                  const result = unwrapResult(actionResult);
+
+                  if (result) {
+                     setFieldValue('title', '');
+                     setFieldValue('description', '');
+                     setFieldValue('price', '');
+                     setFieldValue('brand', '');
+                     setFieldValue('category', '');
+                     setFieldValue('color', []);
+                     setFieldValue('quantity', '');
+                     setFieldValue('images', []);
+                     setSelectedItems([]);
+                     setFormKey((prevKey) => prevKey + 1);
+                  }
+               } catch (error) {
+                  console.error('Error creating product:', error);
+               } finally {
+                  setSubmitting(false);
+               }
             }}
          >
             {({ isSubmitting, setFieldValue }) => (
@@ -146,72 +169,75 @@ const AddProduct = () => {
                         </div>
                      )}
                   </ErrorMessage>
+
                   <label htmlFor='brand' className='sr-only'>
                      Select Product Brand
                   </label>
-
-                  <Select
-                     mode='multiple'
-                     name='brand'
-                     placeholder='Select Product Brand'
-                     handleChange={(value) =>
-                        handleChange(value, setFieldValue)
-                     }
-                     style={{
-                        width: '100%',
-                     }}
-                     options={
-                        brand
-                           ? brand.map((item) => ({
-                                value: item.title,
-                                label: item.title,
-                                key: item._id,
-                             }))
-                           : []
-                     }
-                  />
-
+                  <div className='brandProduct'>
+                     <Select
+                        name='brand'
+                        placeholder='Select Product Brand'
+                        onChange={(value) => setFieldValue('brand', value)}
+                        style={{
+                           width: '100%',
+                        }}
+                        options={
+                           brand
+                              ? brand.map((item) => ({
+                                   value: item.title,
+                                   label: item.title,
+                                   key: item._id,
+                                }))
+                              : []
+                        }
+                     />
+                  </div>
                   <ErrorMessage name='brand'>
                      {(msg) => (
                         <div
                            style={{
                               color: 'red',
-                              paddingLeft: '4px',
-                              margin: '5px 0 0 0',
                            }}
                         >
                            {msg}
                         </div>
                      )}
                   </ErrorMessage>
+
                   <label htmlFor='category' className='sr-only'>
                      Select Product Categories
                   </label>
-                  <Field
-                     as='select'
-                     name='category'
-                     className='appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 text-lg placeholder:text-black cursor-pointer'
-                  >
-                     <option value='category'>Select Categories</option>
-                     {category.map((item) => (
-                        <option key={item._id} value={item.title}>
-                           {item.title}
-                        </option>
-                     ))}
-                  </Field>
+                  <div className='brandProduct'>
+                     <Select
+                        name='category'
+                        placeholder='Select Product Categories'
+                        onChange={(value) => setFieldValue('category', value)}
+                        style={{
+                           width: '100%',
+                        }}
+                        options={
+                           brand
+                              ? category.map((item) => ({
+                                   value: item.title,
+                                   label: item.title,
+                                   key: item._id,
+                                }))
+                              : []
+                        }
+                     />
+                  </div>
                   <ErrorMessage name='category'>
                      {(msg) => (
                         <div
                            style={{
                               color: 'red',
-                              paddingLeft: '4px',
-                              margin: '5px 0 0 0',
                            }}
                         >
                            {msg}
                         </div>
                      )}
                   </ErrorMessage>
+
                   <Select
                      mode='multiple'
                      value={selectedItems.map((item) => item.title)}
@@ -284,9 +310,10 @@ const AddProduct = () => {
                         </div>
                      )}
                   </ErrorMessage>
-                  <button
-                     type='submit'
-                     // disabled={isSubmitting}
+                  <Button
+                     type='primary'
+                     htmlType='submit'
+                     loading={isSubmitting}
                      className={`group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
                         isSubmitting
                            ? 'bg-gray-400'
@@ -294,7 +321,7 @@ const AddProduct = () => {
                      } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-auto`}
                   >
                      Add Product
-                  </button>
+                  </Button>
                </Form>
             )}
          </Formik>

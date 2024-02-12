@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { base_url } from '../../utils/base_url';
+import { message } from 'antd';
 
 const getAllProducts = async () => {
    try {
@@ -30,6 +31,7 @@ const createProduct = async (product) => {
             Authorization: `Bearer ${token}`,
          },
       });
+      message.success('Product added successfully');
       return response.data;
    } catch (error) {
       if (
@@ -37,14 +39,18 @@ const createProduct = async (product) => {
          error.response.data.name === 'MongoError' &&
          error.response.data.code === 11000
       ) {
-         return {
-            message:
-               'Duplicate key error: A product with this title already exists.',
-         };
+         message.error(
+            'Duplicate key error: A product with this title already exists.'
+         );
+         throw new Error(
+            'Duplicate key error: A product with this title already exists.'
+         );
       } else if (error.response) {
-         return error.response.data;
+         message.error('A product with this title already exists.');
+         throw new Error('A product with this title already exists.');
       } else {
-         return { message: 'Network error' };
+         message.error('Network error');
+         throw new Error('Network error');
       }
    }
 };

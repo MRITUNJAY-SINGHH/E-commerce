@@ -44,6 +44,16 @@
    border-radius: 5px !important;
    padding: 0.8rem 0.8rem !important;
 }
+.brandProduct .ant-select-selector {
+   border-radius: 5px !important;
+   padding: 25px 25px 25px 25px !important;
+}
+.brandProduct .ant-select-selection-item {
+   font-size: 18px !important;
+}
+.brandProduct .ant-select-arrow {
+   padding-top: 18px !important;
+}
 .ant-select-selection-overflow-item {
    font-size: 18px !important;
 }
