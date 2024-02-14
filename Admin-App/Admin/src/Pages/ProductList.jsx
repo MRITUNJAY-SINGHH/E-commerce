@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TableLayout from '../layout/Table';
 import { getAllProducts } from '../features/products/productSlice';
 import { Link } from 'react-router-dom';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
-import { Tooltip, Modal, Card, Row, Col, Typography } from 'antd';
-
-const { Title, Paragraph } = Typography;
+import { Tooltip, Modal, Card, Row, Col } from 'antd';
+import Paragraph from 'antd/es/typography/Paragraph';
 
 const ProductList = () => {
    const dispatch = useDispatch();
@@ -14,6 +13,10 @@ const ProductList = () => {
 
    const [selectedProduct, setSelectedProduct] = useState(null);
    const [isModalVisible, setIsModalVisible] = useState(false);
+
+   useEffect(() => {
+      setSelectedProduct(products);
+   }, [products]);
 
    const defaultColumns = [
       {
@@ -57,7 +60,7 @@ const ProductList = () => {
                         color: 'black',
                         cursor: 'pointer',
                      }}
-                     onClick={() => handleViewClick(record)}
+                     onClick={() => handleViewClick(record?._id)}
                   />
                </Tooltip>
                <span className='mx-2'>|</span>
@@ -83,8 +86,11 @@ const ProductList = () => {
       },
    ];
 
-   const handleViewClick = (record) => {
-      setSelectedProduct(record);
+   const handleViewClick = (productId) => {
+      const selectedProduct = products.find(
+         (product) => product._id === productId
+      );
+      setSelectedProduct(selectedProduct);
       setIsModalVisible(true);
    };
 
@@ -96,54 +102,148 @@ const ProductList = () => {
    useEffect(() => {
       dispatch(getAllProducts());
    }, [dispatch]);
+   const memoizedSelectedProduct = useMemo(
+      () => selectedProduct,
+      [selectedProduct]
+   );
 
    return (
       <div>
          <h3 className='text-3xl font-semibold mb-3'>Products</h3>
-         <TableLayout data={products} columns={defaultColumns || []} />
+         <TableLayout
+            data={products}
+            columns={defaultColumns || []}
+            onRow={(record) => ({
+               onClick: () => handleViewClick(record._id),
+            })}
+         />
 
          <Modal
-            title={selectedProduct?.title}
+            title='Product Details'
             open={isModalVisible}
             onCancel={handleModalClose}
             footer={null}
             centered
+            width={1000}
          >
-            {selectedProduct && (
-               <>
-                  <Row gutter={16}>
-                     <Col span={12}>
-                        <Card>
-                           {selectedProduct.images &&
+            {memoizedSelectedProduct && (
+               <Row gutter={16}>
+                  <Col span={16}>
+                     <Card>
+                        <Row gutter={[16, 16]}>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Product ID
+                              </strong>
+                              <strong className='text-black text-[16px]'>
+                                 {selectedProduct._id
+                                    ? selectedProduct._id.replace(
+                                         /.(?=.{4,}$)/g,
+                                         '*'
+                                      )
+                                    : ''}
+                              </strong>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Title
+                              </strong>{' '}
+                              <strong className='text-black text-lg'>
+                                 {selectedProduct?.title}
+                              </strong>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Slug
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.slug}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Description
+                              </strong>
+                              <div
+                                 className='text-black text-lg'
+                                 dangerouslySetInnerHTML={{
+                                    __html: selectedProduct.description,
+                                 }}
+                              />
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Price
+                              </strong>
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.price
+                                    ? `₹${selectedProduct.price}`
+                                    : ''}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Category
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.category}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Brand
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.brand}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Quantity
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.quantity}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Sold
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.sold}
+                              </span>
+                           </Col>
+                           <Col span={12} className='flex flex-col'>
+                              <strong className='text-gray-700 text-lg'>
+                                 Total Rating
+                              </strong>{' '}
+                              <span className='text-black text-lg'>
+                                 {selectedProduct.totalrating}
+                              </span>
+                           </Col>
+                        </Row>
+                     </Card>
+                  </Col>
+                  <Col span={8}>
+                     <Card
+                        cover={
+                           selectedProduct.images &&
                            selectedProduct.images.length > 0 ? (
                               <img
-                                 alt={selectedProduct.title}
+                                 key={selectedProduct.images[0]._id}
                                  src={selectedProduct.images[0].url}
-                                 style={{ width: '100%', height: 'auto' }}
+                                 alt={selectedProduct.images[0]._id}
+                                 style={{ objectFit: 'cover' }}
                               />
                            ) : (
-                              <div>No Image Available</div>
-                           )}
-                        </Card>
-                     </Col>
-                     <Col span={12}>
-                        <Title level={3}>{selectedProduct.title}</Title>
-                        <Paragraph>{selectedProduct.description}</Paragraph>
-                        <Paragraph>
-                           <strong>Brand:</strong> {selectedProduct.brand}
-                        </Paragraph>
-                        <Paragraph>
-                           <strong>Category:</strong> {selectedProduct.category}
-                        </Paragraph>
-                        <Paragraph>
-                           <strong>Price:</strong> {selectedProduct.price}
-                        </Paragraph>
-                        <Paragraph>
-                           <strong>Quantity:</strong> {selectedProduct.quantity}
-                        </Paragraph>
-                     </Col>
-                  </Row>
-               </>
+                              <Paragraph className='text-center text-xl flex justify-center items-center text-gray-400'>
+                                 No Image Available
+                              </Paragraph>
+                           )
+                        }
+                     ></Card>
+                  </Col>
+               </Row>
             )}
          </Modal>
       </div>
