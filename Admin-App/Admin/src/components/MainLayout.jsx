@@ -22,6 +22,7 @@ import {
    UnorderedListOutlined,
    UserOutlined,
 } from '@ant-design/icons';
+import { CiDiscount1 } from 'react-icons/ci';
 import {
    Layout,
    Menu,
@@ -158,10 +159,34 @@ const MainLayout = () => {
             },
          ],
       },
+
       {
          key: 'order',
          icon: <ShoppingOutlined style={iconStyle} />,
          label: 'Orders',
+      },
+
+      {
+         key: 'Coupons',
+         icon: <CiDiscount1 style={iconStyle} />,
+         label: 'Coupons',
+         children: [
+            {
+               key: 'add-coupon',
+               icon: <PlusCircleOutlined style={iconStyle} />,
+               label: 'Add Coupon',
+            },
+            {
+               key: 'coupon-list',
+               icon: <ProfileOutlined style={iconStyle} />,
+               label: 'Coupon List',
+            },
+         ],
+      },
+      {
+         key: 'enquires',
+         icon: <QuestionCircleOutlined style={iconStyle} />,
+         label: 'Enquires',
       },
 
       {
@@ -190,11 +215,6 @@ const MainLayout = () => {
                label: 'Blog List Category',
             },
          ],
-      },
-      {
-         key: 'enquires',
-         icon: <QuestionCircleOutlined style={iconStyle} />,
-         label: 'Enquires',
       },
    ];
 

@@ -19,8 +19,10 @@ import AddColor from './Pages/AddColor';
 import AddCategories from './Pages/AddCategories';
 import AddBrand from './Pages/AddBrand';
 import AddProduct from './Pages/AddProduct';
-import { Slide, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AddCoupon from './Pages/AddCoupon';
+import CouponList from './Pages/CouponList';
 
 function App() {
    return (
@@ -36,7 +38,6 @@ function App() {
             draggable
             pauseOnHover
             theme='light'
-            transition={Slide}
          />
          <Routes>
             <Route path='/' element={<Login />} />
@@ -56,6 +57,9 @@ function App() {
                <Route path='category' element={<AddCategories />} />
                <Route path='brand' element={<AddBrand />} />
                <Route path='product' element={<AddProduct />} />
+               <Route path='add-coupon' element={<AddCoupon />} />
+               <Route path='coupon-list' element={<CouponList />} />
+
                <Route
                   path='add-blog-category'
                   element={<AddBlogCategories />}

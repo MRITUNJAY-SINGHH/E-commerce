@@ -128,7 +128,7 @@ const ProductList = () => {
          >
             {memoizedSelectedProduct && (
                <Row gutter={16}>
-                  <Col span={16}>
+                  <Col span={14}>
                      <Card>
                         <Row gutter={[16, 16]}>
                            <Col span={12} className='flex flex-col'>
@@ -224,8 +224,9 @@ const ProductList = () => {
                         </Row>
                      </Card>
                   </Col>
-                  <Col span={8}>
+                  <Col span={10}>
                      <Card
+                        className='border-0 box-shadow-none'
                         cover={
                            selectedProduct.images &&
                            selectedProduct.images.length > 0 ? (
@@ -233,7 +234,13 @@ const ProductList = () => {
                                  key={selectedProduct.images[0]._id}
                                  src={selectedProduct.images[0].url}
                                  alt={selectedProduct.images[0]._id}
-                                 style={{ objectFit: 'cover' }}
+                                 style={{
+                                    objectFit: 'cover',
+                                    height: '390px',
+                                    backgroundPosition: 'center',
+                                    border: '1px solid #f0f0f0',
+                                    borderRadius: '5px',
+                                 }}
                               />
                            ) : (
                               <Paragraph className='text-center text-xl flex justify-center items-center text-gray-400'>
