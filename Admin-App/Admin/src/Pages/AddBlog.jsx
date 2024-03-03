@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { AddAllBlogs } from '../features/blog/blogSlice';
+import CustomUploadImages from '../components/CustomUploadImages';
 const AddBlog = () => {
    const dispatch = useDispatch();
    const formik = useFormik({
@@ -10,17 +11,19 @@ const AddBlog = () => {
          title: '',
          category: '',
          description: '',
+         images: [],
       },
       validationSchema: Yup.object({
          title: Yup.string().required('Blog title is required'),
          category: Yup.string().required('Blog category is required'),
          description: Yup.string().required('Blog content is required'),
+         images: Yup.array().min(1, 'At least one image is required'),
       }),
       onSubmit: (values) => {
          dispatch(AddAllBlogs(values));
 
          formik.resetForm();
-         // console.log(values);
+         console.log(values);
       },
    });
    return (
@@ -82,6 +85,16 @@ const AddBlog = () => {
             {formik.errors.description && formik.touched.description && (
                <div className='text-red-500' style={{ margin: '0' }}>
                   {formik.errors.description}
+               </div>
+            )}
+            <CustomUploadImages
+               setFieldValue={formik.setFieldValue}
+               name='images'
+               context='addBlog'
+            />
+            {formik.errors.images && formik.touched.images && (
+               <div className='text-red-500' style={{ margin: '0' }}>
+                  {formik.errors.images}
                </div>
             )}
 

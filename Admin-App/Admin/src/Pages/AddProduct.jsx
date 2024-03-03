@@ -291,11 +291,9 @@ const AddProduct = () => {
                   </ErrorMessage>
 
                   <CustomUploadImages
-                     name='images'
                      setFieldValue={setFieldValue}
-                     handleChange={(value) =>
-                        handleChange(value, setFieldValue)
-                     }
+                     name='images'
+                     context='addProduct'
                   />
                   <ErrorMessage name='images'>
                      {(msg) => (

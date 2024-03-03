@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, Spin } from 'antd';
@@ -14,7 +15,7 @@ const getBase64 = (file) =>
       reader.onerror = (error) => reject(error);
    });
 
-const CustomUploadImages = ({ setFieldValue }) => {
+const CustomUploadImages = ({ setFieldValue, context }) => {
    const dispatch = useDispatch();
    const isLoading = useSelector((state) => state.upload.isLoading);
    const upload = useSelector((state) => state.upload.upload);
@@ -43,6 +44,7 @@ const CustomUploadImages = ({ setFieldValue }) => {
    };
 
    const handleChange = ({ fileList: newFileList }) => {
+      console.log(newFileList, 'newFileList');
       if (newFileList.length > 8) {
          message.error('You can only upload 8 images');
          return false;
@@ -68,6 +70,7 @@ const CustomUploadImages = ({ setFieldValue }) => {
    };
 
    const handleUpload = async (file) => {
+      console.log(file, 'file');
       const fileSizeLimit = 1;
       if (file.size / 1024 / 1024 > fileSizeLimit) {
          message.error(`File size must be less than ${fileSizeLimit}MB`);
@@ -84,6 +87,13 @@ const CustomUploadImages = ({ setFieldValue }) => {
             file.public_id = response.payload[0].public_id;
             setFileList((prevFileList) => [...prevFileList, file]);
             message.success('Image uploaded successfully');
+
+            // Set images in the appropriate form field based on the context
+            if (context === 'addProduct') {
+               setFieldValue('productImages', images);
+            } else if (context === 'addBlog') {
+               setFieldValue('blogImages', images);
+            }
          }
       } catch (error) {
          message.error('Image upload failed');
