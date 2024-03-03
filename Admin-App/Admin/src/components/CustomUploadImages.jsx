@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, Spin } from 'antd';
@@ -15,7 +14,7 @@ const getBase64 = (file) =>
       reader.onerror = (error) => reject(error);
    });
 
-const CustomUploadImages = ({ setFieldValue, context }) => {
+const CustomUploadImages = ({ setFieldValue }) => {
    const dispatch = useDispatch();
    const isLoading = useSelector((state) => state.upload.isLoading);
    const upload = useSelector((state) => state.upload.upload);
@@ -28,16 +27,8 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
    const handleCancel = () => setPreviewOpen(false);
 
    const images = [];
-   const blogImages = [];
-   const productImages = [];
-
    upload.flat().map((item) => {
       images.push({ public_id: item.public_id, url: item.url });
-      if (context === 'addBlog') {
-         blogImages.push({ public_id: item.public_id, url: item.url });
-      } else if (context === 'addProduct') {
-         productImages.push({ public_id: item.public_id, url: item.url });
-      }
    });
 
    const handlePreview = async (file) => {
@@ -77,7 +68,6 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
    };
 
    const handleUpload = async (file) => {
-      console.log(file, 'file');
       const fileSizeLimit = 1;
       if (file.size / 1024 / 1024 > fileSizeLimit) {
          message.error(`File size must be less than ${fileSizeLimit}MB`);
@@ -91,24 +81,9 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
       try {
          const response = await dispatch(uploadImages(file));
          if (uploadImages.fulfilled.match(response)) {
-            const newImage = {
-               public_id: response.payload[0].public_id,
-               url: response.payload[0].url,
-            };
-
-            setFileList((prevFileList) => [...prevFileList, newImage]);
-
+            file.public_id = response.payload[0].public_id;
+            setFileList((prevFileList) => [...prevFileList, file]);
             message.success('Image uploaded successfully');
-
-            images.push(newImage);
-
-            if (context === 'addProduct') {
-               productImages.push(newImage);
-               setFieldValue('productImages', productImages);
-            } else if (context === 'addBlog') {
-               blogImages.push(newImage);
-               setFieldValue('blogImages', blogImages);
-            }
          }
       } catch (error) {
          message.error('Image upload failed');

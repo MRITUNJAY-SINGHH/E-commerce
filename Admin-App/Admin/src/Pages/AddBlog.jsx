@@ -100,8 +100,8 @@ const AddBlog = () => {
             )}
             <CustomUploadImages
                setFieldValue={formik.setFieldValue}
-               key={uploadKey}
                name='images'
+               key={uploadKey}
                context='addBlog'
             />
             {formik.errors.images && formik.touched.images && (

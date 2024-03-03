@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Editor from '../components/Editor/Editor';
-import { Button, Select } from 'antd';
+import { Select } from 'antd';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,10 @@ import { unwrapResult } from '@reduxjs/toolkit';
 
 const AddProduct = () => {
    const Dispatch = useDispatch();
+   const isLoading = useSelector((state) => state.upload.isLoading);
+
    const { brand } = useSelector((state) => state.brand);
+
    const { category } = useSelector((state) => state.category);
    const { color } = useSelector((state) => state.color);
    const [selectedItems, setSelectedItems] = useState([]);
@@ -103,7 +106,7 @@ const AddProduct = () => {
                }
             }}
          >
-            {({ isSubmitting, setFieldValue }) => (
+            {({ setFieldValue }) => (
                <Form className='w-full space-y-6'>
                   <label htmlFor='productTitle' className='sr-only'>
                      Enter Product Title
@@ -291,7 +294,6 @@ const AddProduct = () => {
                   <CustomUploadImages
                      name='images'
                      setFieldValue={setFieldValue}
-                     context='addProduct'
                      handleChange={(value) =>
                         handleChange(value, setFieldValue)
                      }
@@ -309,18 +311,17 @@ const AddProduct = () => {
                         </div>
                      )}
                   </ErrorMessage>
-                  <Button
-                     type='primary'
-                     htmlType='submit'
-                     loading={isSubmitting}
-                     className={`group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
-                        isSubmitting
-                           ? 'bg-gray-400'
+                  <button
+                     type='submit'
+                     disabled={isLoading}
+                     className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+                        isLoading
+                           ? 'bg-gray-500'
                            : 'bg-indigo-600 hover:bg-indigo-700'
-                     } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-auto`}
+                     } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                   >
-                     Add Product
-                  </Button>
+                     {isLoading ? 'Adding Product...' : 'Add Product'}
+                  </button>
                </Form>
             )}
          </Formik>
