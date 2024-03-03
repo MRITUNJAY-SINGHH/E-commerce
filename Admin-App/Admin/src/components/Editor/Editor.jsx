@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './EditorToolbar';
 import 'react-quill/dist/quill.snow.css';
 
 export const Editor = ({ placeholder, setFieldValue, name }) => {
-   const [state, setState] = React.useState({ value: null });
+   const [state, setState] = useState({ value: null });
    const handleChange = (value) => {
       setState({ value });
       setFieldValue(name, value);

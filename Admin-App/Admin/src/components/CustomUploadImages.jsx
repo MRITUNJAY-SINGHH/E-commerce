@@ -28,8 +28,16 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
    const handleCancel = () => setPreviewOpen(false);
 
    const images = [];
+   const blogImages = [];
+   const productImages = [];
+
    upload.flat().map((item) => {
       images.push({ public_id: item.public_id, url: item.url });
+      if (context === 'addBlog') {
+         blogImages.push({ public_id: item.public_id, url: item.url });
+      } else if (context === 'addProduct') {
+         productImages.push({ public_id: item.public_id, url: item.url });
+      }
    });
 
    const handlePreview = async (file) => {
@@ -44,7 +52,6 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
    };
 
    const handleChange = ({ fileList: newFileList }) => {
-      console.log(newFileList, 'newFileList');
       if (newFileList.length > 8) {
          message.error('You can only upload 8 images');
          return false;
@@ -84,15 +91,23 @@ const CustomUploadImages = ({ setFieldValue, context }) => {
       try {
          const response = await dispatch(uploadImages(file));
          if (uploadImages.fulfilled.match(response)) {
-            file.public_id = response.payload[0].public_id;
-            setFileList((prevFileList) => [...prevFileList, file]);
+            const newImage = {
+               public_id: response.payload[0].public_id,
+               url: response.payload[0].url,
+            };
+
+            setFileList((prevFileList) => [...prevFileList, newImage]);
+
             message.success('Image uploaded successfully');
 
-            // Set images in the appropriate form field based on the context
+            images.push(newImage);
+
             if (context === 'addProduct') {
-               setFieldValue('productImages', images);
+               productImages.push(newImage);
+               setFieldValue('productImages', productImages);
             } else if (context === 'addBlog') {
-               setFieldValue('blogImages', images);
+               blogImages.push(newImage);
+               setFieldValue('blogImages', blogImages);
             }
          }
       } catch (error) {

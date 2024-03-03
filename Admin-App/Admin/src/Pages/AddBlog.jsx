@@ -1,11 +1,16 @@
 import Editor from '../components/Editor/Editor';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { AddAllBlogs } from '../features/blog/blogSlice';
 import CustomUploadImages from '../components/CustomUploadImages';
+import { useState } from 'react';
 const AddBlog = () => {
    const dispatch = useDispatch();
+   const isLoading = useSelector((state) => state.upload.isLoading);
+   const [key, setKey] = useState(Date.now());
+   const [uploadKey, setUploadKey] = useState(0);
+
    const formik = useFormik({
       initialValues: {
          title: '',
@@ -21,8 +26,13 @@ const AddBlog = () => {
       }),
       onSubmit: (values) => {
          dispatch(AddAllBlogs(values));
-
          formik.resetForm();
+
+         formik.setFieldValue('description', '');
+         formik.setFieldValue('images', []);
+
+         setKey(Date.now());
+         setUploadKey((prevKey) => prevKey + 1);
          console.log(values);
       },
    });
@@ -72,6 +82,7 @@ const AddBlog = () => {
                </div>
             )}
             <Editor
+               key={key}
                placeholder='Write something awesome...'
                setFieldValue={formik.setFieldValue}
                name='description'
@@ -89,6 +100,7 @@ const AddBlog = () => {
             )}
             <CustomUploadImages
                setFieldValue={formik.setFieldValue}
+               key={uploadKey}
                name='images'
                context='addBlog'
             />
@@ -100,9 +112,14 @@ const AddBlog = () => {
 
             <button
                type='submit'
-               className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+               disabled={isLoading}
+               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
+                  isLoading
+                     ? 'bg-gray-500'
+                     : 'bg-indigo-600 hover:bg-indigo-700'
+               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
             >
-               Add Blog
+               {isLoading ? 'Adding Blog...' : 'Add Blog'}
             </button>
          </form>
       </div>

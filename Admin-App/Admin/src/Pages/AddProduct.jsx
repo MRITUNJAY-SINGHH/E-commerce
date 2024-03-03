@@ -14,9 +14,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 
 const AddProduct = () => {
    const Dispatch = useDispatch();
-
    const { brand } = useSelector((state) => state.brand);
-
    const { category } = useSelector((state) => state.category);
    const { color } = useSelector((state) => state.color);
    const [selectedItems, setSelectedItems] = useState([]);
@@ -291,9 +289,12 @@ const AddProduct = () => {
                   </ErrorMessage>
 
                   <CustomUploadImages
-                     setFieldValue={setFieldValue}
                      name='images'
+                     setFieldValue={setFieldValue}
                      context='addProduct'
+                     handleChange={(value) =>
+                        handleChange(value, setFieldValue)
+                     }
                   />
                   <ErrorMessage name='images'>
                      {(msg) => (
